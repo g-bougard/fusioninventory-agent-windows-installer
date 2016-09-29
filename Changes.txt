@@ -1,6 +1,10 @@
 FusionInventory Agent Windows Installer - History of Revisions and Changes
 
-2.3.18 (Not yet released)
+2.3.19 (Not released yet)
+strawberry perl package:
+* Add Tie::IxHash Perl module
+
+2.3.18 June 18 2016
 agent:
 * FusionInventory Agent g-bougard/2.3.x (commit: 2db16bf89c | date: jun 15 2016)
 * Win32 service refactoring

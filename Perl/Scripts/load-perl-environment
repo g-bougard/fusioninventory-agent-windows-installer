@@ -62,13 +62,13 @@ declare -r strawberry_pepfia_url='https://sourceforge.net/projects/fiawi/files/s
 
 declare -i -r maximum_commit_length=10
 
-declare +r fusinv_agent_commit='2db16bf89c'
+declare +r fusinv_agent_commit='g8285f24'
 declare +r fusinv_agent_tag='rc8'
 declare -r fusinv_agent_mod_name='FusionInventory-Agent'
 declare -r fusinv_agent_repository='https://github.com/g-bougard/fusioninventory-agent.git'
 
 declare -r fusinv_agent_mod_specific_dependences=''
-declare -r fusinv_agent_mod_dependences='Archive::Extract Compress::Zlib Data::Structure::Util Digest::SHA File::Copy::Recursive File::Which HTTP::Daemon IO::Socket::SSL JSON JSON::PP LWP::Protocol::https LWP::UserAgent Net::IP Net::NBName Net::Ping Net::SNMP Net::Write::Layer2 Parallel::ForkManager Parse::EDID Text::Template Thread::Queue UNIVERSAL::require URI::Escape Win32::Daemon Win32::Job Win32::OLE Win32::TieRegistry Win32::Unicode::File XML::TreePP'
+declare -r fusinv_agent_mod_dependences='Archive::Extract Compress::Zlib Data::Structure::Util Digest::SHA File::Copy::Recursive File::Which HTTP::Daemon IO::Socket::SSL JSON JSON::PP LWP::Protocol::https LWP::UserAgent Net::IP Net::NBName Net::Ping Net::SNMP Net::Write::Layer2 Parallel::ForkManager Parse::EDID Text::Template Thread::Queue UNIVERSAL::require URI::Escape Win32::Daemon Win32::Job Win32::OLE Win32::TieRegistry Win32::Unicode::File XML::TreePP Tie::IxHash'
 declare -r fusinv_agent_mod_uses='base Config constant Crypt::DES Cwd Data::Dumper Digest::MD5 Encode Encode::Byte Encode::CN Encode::JP Encode::KR Encode::TW Encode::Unicode English Fcntl File::Basename File::Find File::Glob File::Path File::Spec File::stat File::Temp Getopt::Long HTTP::Cookies HTTP::Headers HTTP::Request HTTP::Status integer IO::Handle lib List::Util LWP Memoize MIME::Base64 Net::Domain Net::hostent Net::SNMP::Security::USM Net::SNMP::Transport::IPv4::TCP Net::SNMP::Transport::IPv6::TCP Net::SNMP::Transport::IPv6::UDP Pod::Usage POSIX Scalar::Util Socket Storable strict Sys::Hostname Sys::Syslog threads threads::shared Tie::Hash::NamedCapture Time::HiRes Time::Local Time::localtime URI User::pwent utf8 warnings Win32 Win32::API Win32::OLE::Const Win32::OLE::Variant'
 
 declare -r fusinv_agent_mod_dependences_for_test='HTTP::Proxy HTTP::Server::Simple HTTP::Server::Simple::Authen inc::Module::Install IO::Capture::Stderr IPC::Run Test::Compile Test::Deep Test::Exception Test::MockModule Test::MockObject Test::More Test::NoWarnings'
