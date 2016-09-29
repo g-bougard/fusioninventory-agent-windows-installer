@@ -7,4 +7,3 @@ NSIS/fusioninventory-agent_windows-x64_*.exe.*
 NSIS/fusioninventory-agent_windows-x86_*.exe.*
 NSIS/FusionInventory-Agent_MakeNSIS-Output-*.txt
 Perl/Strawberry/
-.idea
