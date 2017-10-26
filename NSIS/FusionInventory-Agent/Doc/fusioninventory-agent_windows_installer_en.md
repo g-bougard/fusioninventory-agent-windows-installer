@@ -216,8 +216,6 @@ behaviour](#specific-options-of-the-agent).
     >
     > `WakeOnLan`
     > :   Wake on LAN task
-    > `Collect`
-    > :   Collect task
 
     There are three macros defined to simplify the mission, they are the
     following:
@@ -729,8 +727,6 @@ information about how to configure and how to use FusionInventory Agent in
     >
     > `WakeOnLan`
     > :   Wake on LAN task
-    > `Collect`
-    > :   Collect task
 
     If you indicate an empty string (`''`) ---the default value--- all tasks
     will be executed.
