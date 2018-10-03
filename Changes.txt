@@ -53,6 +53,9 @@ core:
 * Update PCI IDs database (pci.ids file) to 2018.10.02
 * Update USB IDs database (usb.ids file) to 2018.08.15
 
+tools:
+* Updated dmidecode to v3.2
+
 2.4.1 Tue, 03 Jul 2018
 agent:
 * FusionInventory Agent 2.4.1 (commit: 7c7db6661f | date: jun 29 2018)
