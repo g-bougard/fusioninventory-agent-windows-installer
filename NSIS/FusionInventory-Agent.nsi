@@ -327,6 +327,7 @@ Var FusionInventoryAgentTaskNetCoreInstalled
 !include "${FIAI_DIR}\Include\SectionFunc.nsh"
 !include "${FIAI_DIR}\Include\WinServicesFunc.nsh"
 !include "${FIAI_DIR}\Include\WinTasksFunc.nsh"
+!include "${FIAI_DIR}\Include\WinFirewallFunc.nsh"
 !include "${FIAI_DIR}\Include\CurrentConfig.nsh"
 
 
@@ -583,6 +584,9 @@ Section "-Init" SecInit
    ${UninstallCurrentAgent} $R0
    DetailPrint "Agent Uninstalled with Code: '$R0'"
 
+   ; Remove firewall exceptions (be sure)
+   ${RemoveFusionInventoryFirewallExceptions}
+
    ; Remove Windows service (be sure)
    ${RemoveFusionInventoryWindowsService}
 
@@ -719,6 +723,12 @@ Section "-End" SecEnd
    ${If} $R0 = 0
       ${InstallStartMenuFolder}
    ${EndIf}
+
+   ; Add Firewall exceptions
+   ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_ADD-FIREWALL-EXCEPTION}"
+   ${If} $R0 = 1
+      ${AddFusionInventoryFirewallException}
+   ${EndIf}
 SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -748,6 +758,9 @@ Section "-un.Init"
    ; Delete Start Menu folder
    SetShellVarContext all
    RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
+
+   ; Remove firewall exceptions (be sure)
+   ${RemoveFusionInventoryFirewallExceptions}
 
    ; Remove Windows service
    ${RemoveFusionInventoryWindowsService}

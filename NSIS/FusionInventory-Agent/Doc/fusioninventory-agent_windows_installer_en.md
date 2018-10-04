@@ -1,4 +1,4 @@
-% FusionInventory Agent Windows Installer 2.3.18\
+% FusionInventory Agent Windows Installer 2.4.2\
   User's Guide
 % Tomás Abad Gómez-Pastrana
 % Jan 18, 2016
@@ -7,18 +7,18 @@
 
 # Synopsys
 
-> `fusioninventory-agent_windows-x86_2.3.18.exe [/Option [/Option [...]]]`
+> `fusioninventory-agent_windows-x86_2.4.2.exe [/Option [/Option [...]]]`
 >
-> `fusioninventory-agent_windows-x64_2.3.18.exe [/Option [/Option [...]]]`
+> `fusioninventory-agent_windows-x64_2.4.2.exe [/Option [/Option [...]]]`
 [^fiawi64]
 
-[^fiawi64]: *`fusioninventory-agent_windows-x64_2.3.18.exe`* can only be
+[^fiawi64]: *`fusioninventory-agent_windows-x64_2.4.2.exe`* can only be
     installed on 64-bit (x86_64) systems.
 
 # Description
 
-FusionInventory Agent Windows Installer 2.3.18 installs FusionInventory Agent
-2.3.18 on Microsoft Windows operating systems[^acronyms].
+FusionInventory Agent Windows Installer installs FusionInventory Agent
+on Microsoft Windows operating systems[^acronyms].
 
 It has two types of installation; the *from-scratch* type, that allows to
 perform an installation of FusionInventory Agent from the beginning ---based on
@@ -35,7 +35,7 @@ interactive way.
 It is needed to bear in mind that, with independence of the type of
 installation choosed, any existing release of FusionInventory Agent present on
 the system will be uninstalled automatically just before installing
-FusionInventory Agent 2.3.18. It is also noteworthy that, in the case of a
+FusionInventory Agent. It is also noteworthy that, in the case of a
 *from-current-config* installation, any deprecated option will not be taken
 into account, and that any other change regarding options ---renaming,
 splitting or grouping--- will be managed automatically.
@@ -118,8 +118,6 @@ behaviour](#specific-options-of-the-agent).
 :   Adds FusionInventory Agent to the Windows Firewall exception list.  (By
     default: `No`)
 
-    *It is not implemented yet*.
-
 `/ca-cert-uri`{#ca-cert-uri}=*URI*
 
 :   *URI* from where to obtain the file or files of certificate of authorities
@@ -187,8 +185,6 @@ behaviour](#specific-options-of-the-agent).
     `%ProgramFiles%\FusionInventory-Agent`)
 
     *pathname* must be an absolute path.
-
-    *It is not implemented yet*.
 
 `/installtasks`{#installtasks}={*task*[,*task*[...]] | *macro*}
 
