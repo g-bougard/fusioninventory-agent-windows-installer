@@ -80,12 +80,11 @@ Var CommandLineSyntaxError
 !macro OutputCommandLineSyntaxError
    FileOpen $0 "${COMMANDLINE_PARSER_LOGFILE}" r
    IfErrors done
-   loop:
    FileRead $0 $1
-   IfErrors close
-   ${StdErr} "$1"
-   goto loop
-   close:
+   ${Do}
+      ${StdErr} "$1"
+      FileRead $0 $1
+   ${LoopUntil} ${Errors}
    FileClose $0
    done:
 !macroend
