@@ -129,7 +129,7 @@ Function InstallFusionInventoryWindowsService
    ; Install the service
    SimpleSC::InstallService \
       "${PRODUCT_INTERNAL_NAME}" "${PRODUCT_NAME}" "16" "${SERVICE_STARTTYPE_DEMAND}" \
-      `"$R1\perl\bin\fusioninventory-agent.exe" "$R1\perl\bin\fusioninventory-win32-service"` \
+      `"$R1\perl\bin\fusioninventory-agent.exe" -I"$R1\perl\agent" -I"$R1\perl\lib" -I"$R1\perl\site\lib" -I"$R1\perl\vendor\lib" "$R1\perl\bin\fusioninventory-win32-service"` \
       "" "" ""
    Pop $R3
 

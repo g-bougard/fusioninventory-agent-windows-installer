@@ -50,6 +50,8 @@ agent:
 * Disable Maintenance task if no maintenance module could be used
 
 core:
+* Register service with folders to include to avoid conflicts from any other
+  local perl install
 * Update PCI IDs database (pci.ids file) to 2018.10.02
 * Update USB IDs database (usb.ids file) to 2018.08.15
 
