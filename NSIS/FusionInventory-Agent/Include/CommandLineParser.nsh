@@ -57,13 +57,10 @@
 !include "${FIAI_DIR}\Include\WinTasksFunc.nsh"
 
 
-; Define command line parser logfile
-!define COMMANDLINE_PARSER_LOGFILE "$PLUGINSDIR\CommandLineParser.log"
-
-
 ; Global variables
 Var CommandLineNotProcessed
 Var CommandLineSyntaxError
+Var COMMANDLINE_PARSER_LOGFILE
 
 
 ; CommandLineSyntaxError
@@ -201,7 +198,7 @@ Function GetCommandLineOptions
    StrCpy $R8 "${IOS_COMMANDLINE}"
 
    ; Create an empty command line parser logfile
-   Delete "${COMMANDLINE_PARSER_LOGFILE}"
+   GetTempFileName ${COMMANDLINE_PARSER_LOGFILE}
    FileOpen $R9 "${COMMANDLINE_PARSER_LOGFILE}" w
 
    ; Delete '$R8' section from Options.ini

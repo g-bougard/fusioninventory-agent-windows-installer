@@ -883,7 +883,7 @@ Function .onInit
          CopyFiles "${INI_OPTIONS_FILE}" "$R0\debug\"
          CopyFiles "$PLUGINSDIR\CommandLineParser.log" "$R0\debug\"
          ${OutputCommandLineSyntaxError}
-         MessageBox MB_OK|MB_ICONSTOP "Command line error"
+         MessageBox MB_OK|MB_ICONSTOP "Command line error: See ${COMMANDLINE_PARSER_LOGFILE}"
          Abort
       ${EndIf}
    ${Else}
@@ -898,7 +898,7 @@ Function .onInit
          CopyFiles "${INI_OPTIONS_FILE}" "$R0\debug\"
          CopyFiles "$PLUGINSDIR\CommandLineParser.log" "$R0\debug\"
          ${OutputCommandLineSyntaxError}
-         MessageBox MB_OK|MB_ICONSTOP "Command line error"
+         MessageBox MB_OK|MB_ICONSTOP "Command line error: See ${COMMANDLINE_PARSER_LOGFILE}"
       ${EndIf}
    ${EndIf}
 
@@ -920,6 +920,9 @@ Function .onInstSuccess
    ${If} $R0 = 1
       ${RunAgentNow}
    ${EndIf}
+
+   ; Delete parser log
+   Delete "${COMMANDLINE_PARSER_LOGFILE}"
 
    ; Prepare to exit
    ${PrepareToExit}
