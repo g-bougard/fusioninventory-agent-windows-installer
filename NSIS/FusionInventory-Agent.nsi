@@ -878,7 +878,12 @@ Function .onInit
             Call .onInitSilentMode
          ${EndIf}
       ${Else}
+         ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_INSTALLDIR}"
+         CreateDirectory "$R0\debug\"
+         CopyFiles "${INI_OPTIONS_FILE}" "$R0\debug\"
+         CopyFiles "$PLUGINSDIR\CommandLineParser.log" "$R0\debug\"
          ${OutputCommandLineSyntaxError}
+         MessageBox MB_OK|MB_ICONSTOP "Command line error"
          Abort
       ${EndIf}
    ${Else}
@@ -888,7 +893,12 @@ Function .onInit
       ${IfNot} ${CommandLineSyntaxError}
          Call .onInitVisualMode
       ${Else}
+         ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_INSTALLDIR}"
+         CreateDirectory "$R0\debug\"
+         CopyFiles "${INI_OPTIONS_FILE}" "$R0\debug\"
+         CopyFiles "$PLUGINSDIR\CommandLineParser.log" "$R0\debug\"
          ${OutputCommandLineSyntaxError}
+         MessageBox MB_OK|MB_ICONSTOP "Command line error"
       ${EndIf}
    ${EndIf}
 
