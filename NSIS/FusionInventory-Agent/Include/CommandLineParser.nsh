@@ -79,14 +79,14 @@ Var CommandLineSyntaxError
 !define OutputCommandLineSyntaxError "!insertmacro OutputCommandLineSyntaxError"
 !macro OutputCommandLineSyntaxError
    FileOpen $0 "${COMMANDLINE_PARSER_LOGFILE}" r
-   IfErrors done
-   FileRead $0 $1
-   ${Do}
-      ${StdErr} "$1"
+   ${IfNot} ${Errors}
       FileRead $0 $1
-   ${LoopUntil} ${Errors}
-   FileClose $0
-   done:
+      ${Do}
+         ${StdErr} "$1"
+         FileRead $0 $1
+      ${LoopUntil} ${Errors}
+      FileClose $0
+   ${EndIf}
 !macroend
 
 ; GetCommandLineOptions
