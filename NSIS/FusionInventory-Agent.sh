@@ -130,20 +130,18 @@ else
 fi
 option_nsis_define="$option_nsis_define -DFIA_RELEASE=${fusinv_agent_release}"
 
-if [ -z "${fusinv_agent_release##*.*.*}" ]; then
-    read MAJOR MINOR SUB <<<"${fusinv_agent_release//./ }"
-    if [ -n "${MAJOR}" ]; then
-       option_nsis_define="$option_nsis_define -DFIA_MAJOR=${MAJOR}"
-    else
-       echo "ERROR: Can't read MAJOR version number" >&2
-       exit 1
-    fi
-    if [ -n "${MINOR}" ]; then
-       option_nsis_define="$option_nsis_define -DFIA_MINOR=${MINOR%%-*}"
-    else
-       echo "ERROR: Can't read MINOR version number" >&2
-       exit 1
-    fi
+read MAJOR MINOR SUB <<<"${fusinv_agent_release//./ }"
+if [ -n "${MAJOR}" ]; then
+   option_nsis_define="$option_nsis_define -DFIA_MAJOR=${MAJOR}"
+else
+   echo "ERROR: Can't read MAJOR version number" >&2
+   exit 1
+fi
+if [ -n "${MINOR}" ]; then
+   option_nsis_define="$option_nsis_define -DFIA_MINOR=${MINOR%%-*}"
+else
+   echo "ERROR: Can't read MINOR version number" >&2
+   exit 1
 fi
 
 # Support numbering with empty or 'x' SUB as zero sub

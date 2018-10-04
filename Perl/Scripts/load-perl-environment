@@ -72,7 +72,7 @@ if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then
    declare -r fusinv_agent_release="${APPVEYOR_REPO_TAG_NAME}"
 elif [ -n "${APPVEYOR_REPO_BRANCH}" ]; then
    declare -r fusinv_agent_commit="develop"
-   declare -r fusinv_agent_release="develop"
+   declare -r fusinv_agent_release="2.4.x"
    declare -r TYPE="development"
 elif [ -n "${FIA_RELEASE}" ]; then
    declare -r fusinv_agent_release="${FIA_RELEASE}"
