@@ -60,12 +60,10 @@
    Push $R0
    Push $R1
 
-   ${If} ${FusionInventoryAgentTaskIsInstalled}
-      nsExec::ExecTostack 'netsh advfirewall firewall delete rule \
-         name="${PRODUCT_INTERNAL_NAME}"'
-      Pop $R0
-      Pop $R1
-   ${EndIf}
+   nsExec::ExecTostack 'netsh advfirewall firewall delete rule \
+      name="${PRODUCT_INTERNAL_NAME}"'
+   Pop $R0
+   Pop $R1
 
    ; Pop $R1 & $R0 off of the stack
    Pop $R1
