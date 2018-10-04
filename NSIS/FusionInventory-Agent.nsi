@@ -887,6 +887,7 @@ Function .onInit
             Call .onInitSilentMode
          ${EndIf}
       ${Else}
+         MessageBox MB_OK|MB_ICONSTOP "Command line error: $LastCommandLineError"
          Abort
       ${EndIf}
    ${Else}
@@ -896,7 +897,7 @@ Function .onInit
       ${IfNot} ${CommandLineSyntaxError}
          Call .onInitVisualMode
       ${Else}
-         Nop
+         MessageBox MB_OK|MB_ICONSTOP "Command line error: $LastCommandLineError"
       ${EndIf}
    ${EndIf}
 
