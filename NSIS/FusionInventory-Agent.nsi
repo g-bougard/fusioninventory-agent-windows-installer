@@ -916,7 +916,8 @@ Function .onInstSuccess
    ; Check runnow option
    ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_RUNNOW}"
    ${If} $R0 = 1
-      ${RunAgentNow}
+      ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_INSTALLDIR}"
+      Exec '"$R0\fusioninventory-agent.bat" --wait=5 --delaytime=10'
    ${EndIf}
 
    ; Prepare to exit
