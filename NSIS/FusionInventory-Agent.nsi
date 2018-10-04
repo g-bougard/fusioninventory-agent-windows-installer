@@ -917,7 +917,7 @@ Function .onInstSuccess
    ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_RUNNOW}"
    ${If} $R0 = 1
       ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_INSTALLDIR}"
-      Exec '"$R0\fusioninventory-agent.bat" --wait=5 --delaytime=10'
+      ExecShell "" '"$R0\fusioninventory-agent.bat"' '--wait=5 --delaytime=10' SW_HIDE
    ${EndIf}
 
    ; Prepare to exit

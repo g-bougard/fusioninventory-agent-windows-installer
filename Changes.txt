@@ -53,6 +53,7 @@ core:
 * Register service with folders to include to avoid conflicts from any other
   local perl install
 * /add-firewall-exception option is now fully implemented
+* Fix /runnow option
 * Update PCI IDs database (pci.ids file) to 2018.10.02
 * Update USB IDs database (usb.ids file) to 2018.08.15
 
