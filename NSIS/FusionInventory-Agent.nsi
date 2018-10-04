@@ -878,12 +878,8 @@ Function .onInit
             Call .onInitSilentMode
          ${EndIf}
       ${Else}
-         ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_INSTALLDIR}"
-         CreateDirectory "$R0\debug\"
-         CopyFiles "${INI_OPTIONS_FILE}" "$R0\debug\"
-         CopyFiles "$PLUGINSDIR\CommandLineParser.log" "$R0\debug\"
          ${OutputCommandLineSyntaxError}
-         MessageBox MB_OK|MB_ICONSTOP "Command line error: See ${COMMANDLINE_PARSER_LOGFILE}"
+         MessageBox MB_OK|MB_ICONSTOP "Command line error: See $COMMANDLINE_PARSER_LOGFILE"
          Abort
       ${EndIf}
    ${Else}
@@ -893,12 +889,8 @@ Function .onInit
       ${IfNot} ${CommandLineSyntaxError}
          Call .onInitVisualMode
       ${Else}
-         ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_INSTALLDIR}"
-         CreateDirectory "$R0\debug\"
-         CopyFiles "${INI_OPTIONS_FILE}" "$R0\debug\"
-         CopyFiles "$PLUGINSDIR\CommandLineParser.log" "$R0\debug\"
          ${OutputCommandLineSyntaxError}
-         MessageBox MB_OK|MB_ICONSTOP "Command line error: See ${COMMANDLINE_PARSER_LOGFILE}"
+         MessageBox MB_OK|MB_ICONSTOP "Command line error: See $COMMANDLINE_PARSER_LOGFILE"
       ${EndIf}
    ${EndIf}
 
@@ -922,7 +914,7 @@ Function .onInstSuccess
    ${EndIf}
 
    ; Delete parser log
-   Delete "${COMMANDLINE_PARSER_LOGFILE}"
+   Delete "$COMMANDLINE_PARSER_LOGFILE"
 
    ; Prepare to exit
    ${PrepareToExit}

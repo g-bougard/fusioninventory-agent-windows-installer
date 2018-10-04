@@ -75,7 +75,7 @@ Var COMMANDLINE_PARSER_LOGFILE
 ; OutputCommandLineSyntaxError
 !define OutputCommandLineSyntaxError "!insertmacro OutputCommandLineSyntaxError"
 !macro OutputCommandLineSyntaxError
-   FileOpen $0 "${COMMANDLINE_PARSER_LOGFILE}" r
+   FileOpen $0 "$COMMANDLINE_PARSER_LOGFILE" r
    ${IfNot} ${Errors}
       FileRead $0 $1
       ${Do}
@@ -198,8 +198,8 @@ Function GetCommandLineOptions
    StrCpy $R8 "${IOS_COMMANDLINE}"
 
    ; Create an empty command line parser logfile
-   GetTempFileName ${COMMANDLINE_PARSER_LOGFILE}
-   FileOpen $R9 "${COMMANDLINE_PARSER_LOGFILE}" w
+   GetTempFileName $COMMANDLINE_PARSER_LOGFILE
+   FileOpen $R9 "$COMMANDLINE_PARSER_LOGFILE" w
 
    ; Delete '$R8' section from Options.ini
    ${DeleteINIOptionSection} "$R8"
