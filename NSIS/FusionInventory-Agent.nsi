@@ -216,7 +216,7 @@ SetCompressor /FINAL /SOLID lzma
    !else
       !ifdef FIAI_BUILD
          ; Product version for development releases with build number
-         !define PRODUCT_VERSION "${FIA_RELEASE}-build-${FIAI_BUILD}"
+         !define PRODUCT_VERSION "${FIA_RELEASE}-develop-${FIAI_BUILD}"
          !define PRODUCT_VERSION_BUILD "${FIAI_BUILD}"
 
          ; File version

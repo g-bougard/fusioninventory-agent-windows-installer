@@ -1,4 +1,4 @@
-version: '{branch}-build-{build}'
+version: '{branch}-develop-{build}'
 
 shallow_clone: true
 
