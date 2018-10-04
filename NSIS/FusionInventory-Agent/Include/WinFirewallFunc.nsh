@@ -100,7 +100,7 @@ Function AddFusionInventoryFirewallException
    ; Create firewall exceptions
    nsExec::ExecTostack 'netsh advfirewall firewall add rule \
       name="${PRODUCT_INTERNAL_NAME}" \
-      program="$R1\perl\bin\fusioninventory-agent.exe" \
+      program="$R2\perl\bin\fusioninventory-agent.exe" \
       description="FusionInventory-Agent service HTTP daemon incoming traffic" \
       protocol=TCP dir=in localport=$R1 action=allow'
    Pop $R3
@@ -111,7 +111,7 @@ Function AddFusionInventoryFirewallException
 
    nsExec::ExecTostack 'netsh advfirewall firewall add rule \
       name="${PRODUCT_INTERNAL_NAME}" \
-      program="$R1\perl\bin\fusioninventory-agent.exe" \
+      program="$R2\perl\bin\fusioninventory-agent.exe" \
       description="All FusionInventory-Agent service traffic" \
       dir=out action=allow'
    Pop $R3
@@ -122,7 +122,7 @@ Function AddFusionInventoryFirewallException
 
    nsExec::ExecTostack 'netsh advfirewall firewall add rule \
       name="${PRODUCT_INTERNAL_NAME}" \
-      program="$R1\perl\bin\perl.exe" \
+      program="$R2\perl\bin\perl.exe" \
       description="All FusionInventory-Agent perl interpreter traffic" \
       dir=out action=allow'
    Pop $R3
