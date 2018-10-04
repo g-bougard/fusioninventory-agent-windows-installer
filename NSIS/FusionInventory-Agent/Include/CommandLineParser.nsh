@@ -75,6 +75,21 @@ Var CommandLineSyntaxError
 !define CommandLineSyntaxError `"" CommandLineSyntaxError ""`
 
 
+; OutputCommandLineSyntaxError
+!defined OutputCommandLineSyntaxError "!insertmacro OutputCommandLineSyntaxError"
+!macro OutputCommandLineSyntaxError
+   FileOpen $0 "${COMMANDLINE_PARSER_LOGFILE}" r
+   IfErrors done
+   loop:
+   FileRead $0 $1
+   IfErrors close
+   ${StdErr} "$1"
+   goto loop
+   close:
+   FileClose $0
+   done:
+!macroend
+
 ; GetCommandLineOptions
 !define CommandLineOptionsSearchBlock "!insertmacro CommandLineOptionsSearchBlock"
 
@@ -245,6 +260,7 @@ Function GetCommandLineOptions
          ; Syntax error
          StrCpy $CommandLineSyntaxError 0
          ${FileWriteLine} $R9 "Syntax error. The value '$R3' is not allowed."
+         ${StdErr} "Wrong /backend-collect-timeout value: $R3"
          ${Break}
       ${EndIf}
    ${EndCommandLineOptionsSearchBlock}

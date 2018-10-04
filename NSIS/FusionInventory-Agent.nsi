@@ -215,7 +215,7 @@ SetCompressor /FINAL /SOLID lzma
    !else
       !ifdef FIAI_BUILD
          ; Product version for development releases with build number
-         !define PRODUCT_VERSION "${FIA_RELEASE}-build-${FIAI_BUILD}"
+         !define PRODUCT_VERSION "${FIA_RELEASE}-test-${FIAI_BUILD}"
          !define PRODUCT_VERSION_BUILD "${FIAI_BUILD}"
 
          ; File version
@@ -327,6 +327,7 @@ Var FusionInventoryAgentTaskNetCoreInstalled
 !include "${FIAI_DIR}\Include\WinServicesFunc.nsh"
 !include "${FIAI_DIR}\Include\WinTasksFunc.nsh"
 !include "${FIAI_DIR}\Include\CurrentConfig.nsh"
+!include "${FIAI_DIR}\Include\FileFunc.nsh"
 
 
 ;--------------------------------
@@ -808,6 +809,9 @@ Function .onInit
    ; ClosePadLock
    ${ClosePadLock}
 
+   ; StdErrInit
+   ${StdErrInit}
+
    ; Set default language
    ;StrCpy $LANGUAGE ${LANG_ENGLISH}
    ;StrCpy $LANGUAGE ${LANG_FRENCH}
@@ -859,6 +863,7 @@ Function .onInit
    ; Check for silent installation mode
    ${If} ${Silent}
       ; Silent installation mode
+      ${StdErr} "Silent installation mode"
 
       ; Check for command line syntax error
       ${IfNot} ${CommandLineSyntaxError}
@@ -873,6 +878,7 @@ Function .onInit
             Call .onInitSilentMode
          ${EndIf}
       ${Else}
+         ${OutputCommandLineSyntaxError}
          Abort
       ${EndIf}
    ${Else}
@@ -882,7 +888,7 @@ Function .onInit
       ${IfNot} ${CommandLineSyntaxError}
          Call .onInitVisualMode
       ${Else}
-         Nop
+         ${OutputCommandLineSyntaxError}
       ${EndIf}
    ${EndIf}
 

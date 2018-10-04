@@ -46,6 +46,12 @@
 !define __FIAI_FILEFUNC_INCLUDE__
 
 
+!include LogicLib.nsh
+
+
+; Global variables
+Var STDERR
+
 ; FileWriteLine
 !define FileWriteLine "!insertmacro FileWriteLine"
 
@@ -53,6 +59,32 @@
    FileWrite ${Handle} "${String}"
    FileWriteByte ${Handle} "13"
    FileWriteByte ${Handle} "10"
+!macroend
+
+
+; StdErrInit
+!define StdErrInit "!insertmacro StdErrInit"
+
+!macro StdErrInit
+   System::Call 'kernel32::GetStdHandle(i -12)i'
+   pop $STDERR
+   System::Call 'kernel32::AttachConsole(i -1)i.r0'
+   ${If} $STDERR = 0
+   ${OrIf} $R0 = 0
+      System::Call 'kernel32::AllocConsole()'
+      System::Call 'kernel32::GetStdHandle(i -12)i'
+      pop $STDERR
+   ${EndIf}
+!macroend
+
+
+; StdErr
+!define StdErr "!insertmacro StdErr"
+
+!macro StdErr String
+   ${IfNot} $STDERR = 0
+      ${FileWriteLine} $STDERR "${String}"
+   ${EndIf}
 !macroend
 
 

@@ -128,7 +128,7 @@ while (( ${iter} < ${#archs[@]} )); do
       if [ "${TYPE}" = "development" ]; then
          BUILD=${APPVEYOR_BUILD_NUMBER}
          : ${BUILD:=0000}
-         FIA_VERSION="${fusinv_agent_release}-build-${BUILD}"
+         FIA_VERSION="${fusinv_agent_release}-test-${BUILD}"
       fi
       : ${APPVEYOR_ACCOUNT_NAME:=$USERNAME}
       APPVEYOR_ACCOUNT_NAME="$( echo -n ${APPVEYOR_ACCOUNT_NAME:0:1} | ${tr} 'a-z' 'A-Z' )${APPVEYOR_ACCOUNT_NAME#?}"
