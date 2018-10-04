@@ -76,7 +76,7 @@ Var CommandLineSyntaxError
 
 
 ; OutputCommandLineSyntaxError
-!defined OutputCommandLineSyntaxError "!insertmacro OutputCommandLineSyntaxError"
+!define OutputCommandLineSyntaxError "!insertmacro OutputCommandLineSyntaxError"
 !macro OutputCommandLineSyntaxError
    FileOpen $0 "${COMMANDLINE_PARSER_LOGFILE}" r
    IfErrors done
