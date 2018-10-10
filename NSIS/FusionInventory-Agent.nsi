@@ -759,7 +759,7 @@ Section "-un.Init"
    SetShellVarContext all
    RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
 
-   ; Remove firewall exceptions (be sure)
+   ; Remove firewall exceptions
    ${RemoveFusionInventoryFirewallExceptions}
 
    ; Remove Windows service
