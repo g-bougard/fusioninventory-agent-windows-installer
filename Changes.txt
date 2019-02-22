@@ -1,5 +1,42 @@
 FusionInventory Agent Windows Installer - History of Revisions and Changes
 
+2.4.3 Fri, 22 Feb 2019
+agent:
+* FusionInventory Agent 2.4.3 (commit: e2b207694a | date: oct 03 2018)
+* fix some cases where a file handle was not closed
+* win32: fix a handle leak case when agent was running as service
+* daemon/service: reload target when the stat file has been updated by
+  another script to use the updated next run timeout
+* For server target, server connection attempts are delayed from 60 seconds,
+  doubled at each new failed attempt, now until reaching max defined by delaytime
+  configuration parameter.
+* Bump Inventory task version to 1.6
+* win32 antivirus support update:
+ - nicer product name report for ESET
+ - report expiration date for ESET
+* Fix #582: Add other Acer monitors support
+* Fix #625: Container UUID is the same than host UUID
+* Fix #604: Only inventory Windows Store on recent win32 platforms
+* Fix #596: Openstack container seen as Physical on win32
+* Fix #583: Add BitDefender antivirus support
+* Bump NetDiscovery task version to 2.8
+* Bump NetInventory task version to 3.2
+* Add BlueCoat proxy appliance serialnumber support
+* win32: Support arp table check for NetDiscovery task
+* Fix #634: Net::Ping version may not numeric with win32 installer
+* Add Panasas PanFS support
+* Add few HP/Compaq serialnumber cases support
+* Fix #605: try 'ip neighbor show' if 'arp' is not available for netdiscovery
+* Add UPS-MIB support for Riello, S2S & APC
+* Updated sysobject.ids (tagged fia-2.4.3 tag on github repository)
+
+core:
+* Update PCI IDs database (pci.ids file) to 2019.02.20
+* Update USB IDs database (usb.ids file) to 2019.01.17
+
+tools:
+* Updated dmidecode to v3.2 (update 1)
+
 2.4.2 Tue, 03 Oct 2018
 agent:
 * FusionInventory Agent 2.4.2 (commit: f7767abfdb | date: oct 03 2018)
