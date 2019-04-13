@@ -1,8 +1,76 @@
 FusionInventory Agent Windows Installer - History of Revisions and Changes
 
+2.5 Sat, 13 Apr 2019
+agent:
+* FusionInventory Agent 2.5 (commit: 4d01dfac65 | date: apr 12 2019)
+* win32: Fix service memory leak due to Win32::Daemon module
+* win32: don't show service memory usage on OS not supporting GetProcessMemoryInfo like WinXP
+* win32: report memory usage as Working Set Size (WSS) and Page File Usage (PFU)
+* win32: handle task run in a managed thread as this is more efficient than using
+  perl fork with thread emulation under win32 and preserve a little memory usage.
+* win32: wait service control manager is ready before really starting the service
+* logger: don't use File::stat module to just get logfile file size, better use -s
+  as File::stat module seems to fail in rare case.
+* Add early stderr logging support for service
+  Just rename "fusioninventory-win32-service.rc.sample" removing ".sample" part
+  to enable this feature. This can be handy to investigate start service failures.
+* Fix #601: Log URL for server target and log path for local target
+* Added support for HTTPD plugins
+* Added Inventory HTTPD plugins to permit remote inventory request (disabled by default)
+* Added Listener target to permit agent to only answer http requests
+* Updated configuration to support HTTPD plugins dedicated configuration file
+* Added fusioninventory-remoteinventory script to request agent with Inventory
+  HTTPD plugin enabled
+* Fix HTTPD local address reuse
+* Added SSL HTTPD plugins to support SSL in any server plugins
+* Limit the reload target check to 30 seconds
+* Bump Inventory task version to 1.7
+* Fix hponcfg.exe can output on stderr on win32 when not really usable
+* Skip not working under win32 Generic::Users inventory
+  Also avoid error in log on /etc/passwd and /etc/group not found files
+* Fix #601: Log deviceid as agentid and related target when running an inventory
+* Fix #644: Make WORKGROUP inventory consistent
+* Fix #541: Don't try to scan virtualbox VM in win32 users directories
+* Bump NetDiscovery task version to 2.9
+* Bump NetInventory task version to 3.3
+* Add Lancom in networking devices recognized by description parsing
+* Fix #650: discard empty consumable level elements
+* Fix #651: discard empty type element
+* Add Netdisco export contrib script from Stoatwblr, see contrib/netdisco
+* Fix #638: Fix Kyocera counters handling thanks to Stoatwblr
+* Printers: assume -2 counter value means a WARNING level and report it
+  Thanks Stoatwblr for the deep investigation
+* Add Oki printer support
+* Add APC serialnumber support
+* Fix #612: Enhanced Ubnt AccessPoint support
+* Updated sysobject.ids (tagged fia-2.5 tag on github repository)
+* Bump Deploy task version to 2.8
+* Fix #394: Check file parts source/mirror url to guaranty it ends with a slash
+  and trigger an error if it doesn't look like a valid URL.
+* Bump Collect task version to 2.6
+* WMI properties can now be a list of properties with comma or space as separator
+
+core:
+* Changed default log file location to:
+  C:\Program Files\FusionInventory-Agent\logs\fusioninventory-agent.log
+* Added perl/bin/fusioninventory-win32-service.rc.sample installation:
+  Rename it to fusioninventory-win32-service.rc to enable early stderr logging
+  during service start
+* Added etc/inventory-server-plugin.cfg as default configuration for new
+  HTTPD Server Inventory plugin (disabled by defaul). You can copy it as
+  etc/inventory-server-plugin.local setting "disabled" to no to enabled it
+* Added etc/ssl-server-plugin.cfg as default configuration for new
+  HTTPD Server SSL plugin (disabled by defaul). You can copy it as
+  etc/ssl-server-plugin.local setting "disabled" to no to enabled it
+* Added etc/server-test-plugin.cfg.sample as sample configuration for
+  HTTPD Server Test plugin (disabled by defaul). You can rename it to
+  etc/server-test-plugin.cfg setting "disabled" to no to enabled it
+* Update PCI IDs database (pci.ids file) to 2019.04.12
+* Update USB IDs database (usb.ids file) to 2019.03.20
+
 2.4.3 Fri, 22 Feb 2019
 agent:
-* FusionInventory Agent 2.4.3 (commit: e2b207694a | date: oct 03 2018)
+* FusionInventory Agent 2.4.3 (commit: e2b207694a | date: feb 22 2019)
 * fix some cases where a file handle was not closed
 * win32: fix a handle leak case when agent was running as service
 * daemon/service: reload target when the stat file has been updated by

@@ -399,9 +399,9 @@ Function InitINIOptionSectionDefault
    ${WriteINIOption} "$R0" "${IO_INSTALLTYPE}" "${INSTALLTYPE_FROMCURRENTCONFIG}"
    ${WriteINIOption} "$R0" "${IO_LOCAL}" ""
    !if ${PRODUCT_PLATFORM_ARCHITECTURE} == ${PLATFORM_ARCHITECTURE_32}
-      ${WriteINIOption} "$R0" "${IO_LOGFILE}" "$PROGRAMFILES32\${PRODUCT_INTERNAL_NAME}\fusioninventory-agent.log"
+      ${WriteINIOption} "$R0" "${IO_LOGFILE}" "$PROGRAMFILES32\${PRODUCT_INTERNAL_NAME}\logs\fusioninventory-agent.log"
    !else
-      ${WriteINIOption} "$R0" "${IO_LOGFILE}" "$PROGRAMFILES64\${PRODUCT_INTERNAL_NAME}\fusioninventory-agent.log"
+      ${WriteINIOption} "$R0" "${IO_LOGFILE}" "$PROGRAMFILES64\${PRODUCT_INTERNAL_NAME}\logs\fusioninventory-agent.log"
    !endif
    ${WriteINIOption} "$R0" "${IO_LOGFILE-MAXSIZE}" "16"
    ${WriteINIOption} "$R0" "${IO_LOGGER}" "${LOGGER_FILE}"

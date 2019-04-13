@@ -543,7 +543,7 @@ information about how to configure and how to use FusionInventory Agent in
 `/logfile`{#logfile}=*filename*
 
 :   Writes log messages into the file *filename*. (By default:
-    `%ProgramFiles%\FusionInventory-Agent\fusioninventory-agent.log`)
+    `%ProgramFiles%\FusionInventory-Agent\logs\fusioninventory-agent.log`)
 
     You must indicate a full path in *filename*. The `/logfile` option has
     effect only if you have also indicated `File` as a value of the
@@ -856,7 +856,7 @@ of the agent](#specific-options-of-the-agent)).
         "httpd-port"="62354"
         "httpd-trust"="127.0.0.1/32"
         "local"=""
-        "logfile"="C:\\Program Files\\FusionInventory-Agent\\fusioninventory-agent.log"
+        "logfile"="C:\\Program Files\\FusionInventory-Agent\\logs\\fusioninventory-agent.log"
         "logfile-maxsize"="16"
         "logger"="File"
         "no-category"=""

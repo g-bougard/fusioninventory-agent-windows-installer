@@ -116,12 +116,12 @@ SetCompressor /FINAL /SOLID lzma
 
 ; Releases of FusionInventory Agent Tasks
 ; TODO: We need to better read tasks release version while preparing sources
-!define FIA_TASK_COLLECT_RELEASE "2.5"
-!define FIA_TASK_DEPLOY_RELEASE "2.7"
+!define FIA_TASK_COLLECT_RELEASE "2.6"
+!define FIA_TASK_DEPLOY_RELEASE "2.8"
 !define FIA_TASK_ESX_RELEASE "2.4"
-!define FIA_TASK_INVENTORY_RELEASE "1.5"
-!define FIA_TASK_NETDISCOVERY_RELEASE "2.7"
-!define FIA_TASK_NETINVENTORY_RELEASE "3.1"
+!define FIA_TASK_INVENTORY_RELEASE "1.7"
+!define FIA_TASK_NETDISCOVERY_RELEASE "2.9"
+!define FIA_TASK_NETINVENTORY_RELEASE "3.3"
 !define FIA_TASK_WAKEONLAN_RELEASE "2.2"
 !define FIA_TASK_WMI_RELEASE "0.3"
 !define FIA_TASK_MAINTENANCE_RELEASE "1.1"

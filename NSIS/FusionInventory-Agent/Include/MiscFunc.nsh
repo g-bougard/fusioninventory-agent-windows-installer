@@ -148,6 +148,7 @@
    CreateDirectory "$R0\perl\bin"
    CreateDirectory "$R0\share"
    CreateDirectory "$R0\var"
+   CreateDirectory "$R0\logs"
 
    ; Create $R0\fusioninventory-agent.bat
    FileOpen $R1 "$R0\fusioninventory-agent.bat" w
@@ -185,6 +186,9 @@
    ; Install $R0\etc
    SetOutPath "$R0\etc\"
    File /oname=agent.cfg.sample "${FIA_DIR}\etc\agent.cfg"
+   File /oname=inventory-server-plugin.cfg "${FIA_DIR}\etc\inventory-server-plugin.cfg"
+   File /oname=server-test-plugin.cfg.sample "${FIA_DIR}\etc\server-test-plugin.cfg"
+   File /oname=ssl-server-plugin.cfg "${FIA_DIR}\etc\ssl-server-plugin.cfg"
 
    ; Install $R0\perl\agent\FusionInventory\Agent.pm
    SetOutPath "$R0\perl\agent\FusionInventory"
@@ -253,6 +257,7 @@
    File "${HDPARM_DIR}\hdparm.exe"
    File "${FIA_DIR}\bin\fusioninventory-agent"
    File "${FIA_DIR}\bin\fusioninventory-win32-service"
+   File "${FIA_DIR}\bin\fusioninventory-win32-service.rc.sample"
 
    ; Install $R0\share
    SetOutPath "$R0\share\"
