@@ -792,6 +792,9 @@ Section "-un.Init"
    ; Delete directory $R0\etc
    RMDir /r "$R0\etc"
 
+   ; Delete directory $R0\logs
+   RMDir /r "$R0\logs"
+
    ; Delete directory $R0\perl
    RMDir /r "$R0\perl"
 
