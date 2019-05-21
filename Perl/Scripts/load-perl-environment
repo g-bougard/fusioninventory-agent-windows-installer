@@ -46,15 +46,15 @@ declare arch_label=''
 declare -a -r archs=(x64 x86)
 declare -a -r arch_labels=(64bit 32bit)
 
-declare -r strawberry_version='5.24.4.1'
-declare -r strawberry_release='April 2018'
+declare -r strawberry_version='5.28.2.1'
+declare -r strawberry_release='May 2019'
 declare -r strawberry_path="../Strawberry/${strawberry_version}"
 
 declare -r strawberry_arch_path='${strawberry_path}/${arch}'
 declare -r strawberry_arch_url='http://strawberryperl.com/download/${strawberry_version}/strawberry-perl-${strawberry_version}-${arch_label}-portable.zip'
 
-declare -r strawberry_pepfia_branch='2.4.x'
-declare -r strawberry_pepfia_build_id='2'
+declare -r strawberry_pepfia_branch='2.5.x'
+declare -r strawberry_pepfia_build_id='1'
 declare -r strawberry_pepfia_path="${strawberry_path%/${strawberry_version}}"
 declare -r strawberry_pepfia_file="strawberry-perl-${strawberry_version}-all-pepfia-${strawberry_pepfia_branch}-${strawberry_pepfia_build_id}.tar.xz"
 declare -r strawberry_pepfia_par_file='strawberry-perl-${strawberry_version}-${arch}-par-pepfia-${strawberry_pepfia_branch}-${strawberry_pepfia_build_id}.zip'

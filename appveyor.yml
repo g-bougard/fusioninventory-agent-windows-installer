@@ -1,29 +1,25 @@
-version: '{branch}-test-{build}'
+version: '{branch}-build-{build}'
 
 shallow_clone: true
 
 install:
-  - cinst pandoc --version 1.17.0.2
   - cd Perl\Scripts
   - .\install-gnu-utilities-collection.bat
-  - .\install-strawberry-perl-package-for-fusioninventory-agent.bat
-  - .\install-fusioninventory-agent.bat
-  - .\patch-fusioninventory-agent.bat
-  - .\update-ids-repositories.bat
+  - .\install-strawberry-perl.bat
+  - .\install-perl-modules-and-dependencies.bat
+  - .\delete-perl-modules-and-dependencies-temporary-files.bat
   - cd ..\..
 
 test: off
 
 build_script:
-  - cd NSIS
-  - .\FusionInventory-Agent.bat
+  - cd Perl\Scripts
+  - .\build-strawberry-perl-package-for-fusioninventory-agent.bat
   - dir
 
 artifacts:
-  - path: NSIS/*.txt,Perl/Scripts/*build.log*
-    name: logs
-  - path: NSIS/*.exe
-    name: exes
-  - path: NSIS/*.md5,NSIS/*.sha1,NSIS/*.sha256
-    name: chks
+  - path: Perl/Strawberry/*.xz
+    name: archives
+  - path: Perl/Strawberry/*.md5,Perl/Strawberry/*.sha1,Perl/Strawberry/*.sha256
+    name: digests
 
