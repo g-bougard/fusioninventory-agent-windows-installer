@@ -16,8 +16,11 @@ build_script:
   - cd Perl\Scripts
   - .\build-strawberry-perl-package-for-fusioninventory-agent.bat
   - dir
+  - dir ..\Strawberry
 
 artifacts:
+  - path: Perl/Strawberry/*.txt
+    name: txts
   - path: Perl/Strawberry/*.xz
     name: archives
   - path: Perl/Strawberry/*.md5,Perl/Strawberry/*.sha1,Perl/Strawberry/*.sha256
