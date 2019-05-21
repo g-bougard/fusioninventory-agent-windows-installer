@@ -1,19 +1,6 @@
-version: '{branch}-develop-{build}'
+version: '{branch}-test-{build}'
 
 shallow_clone: true
-
-notifications:
-  - provider: Email
-    to:
-    - fusioninventory-commit@lists.alioth.debian.org
-    on_build_success: true
-    on_build_failure: true
-    on_build_status_changed: true
-  - provider: Webhook
-    url: https://hooks.aethonan.pro/appveyor/-1001137546384/
-    on_build_success: true
-    on_build_failure: true
-    on_build_status_changed: true
 
 install:
   - cinst pandoc --version 1.17.0.2
@@ -40,13 +27,3 @@ artifacts:
   - path: NSIS/*.md5,NSIS/*.sha1,NSIS/*.sha256
     name: chks
 
-deploy:
-  description: 'Public Release'
-  provider: GitHub
-  auth_token:
-    secure: Fj7kDVdTteWqhYzCHzJWzD396lEPluN+bku+qD+mpPWhAACk1inaAdRzdEQkmgre
-  artifact: exes,chks
-  draft: false
-  prerelease: false
-  on:
-    appveyor_repo_tag: true
