@@ -226,7 +226,7 @@ while (( ${iter} < ${#archs[@]} )); do
 
    (eval cd "${strawberry_arch_path}"
     eval ${perl} ${pp} -p -B -c -u -M threads -o ${tmpdir}/${strawberry_pepfia_par_file} \
-       "${tmpdir}/${strawberry_pepfia_par_template_file}" > /dev/null 2>&1
+       "${tmpdir}/${strawberry_pepfia_par_template_file}" > ../../pp.log 2>&1
    )
 
    # Partial clean
@@ -293,6 +293,7 @@ while (( ${iter} < ${#archs[@]} )); do
             echo -n '.'
          fi
       done
+      echo
       phase=$(( ${phase} + 1 ))
    done
    echo "Done!"
