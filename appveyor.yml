@@ -4,6 +4,8 @@ shallow_clone: true
 
 install:
   - cd Perl\Scripts
+  - appveyor DownloadFile https://releases.teclib.net/temp/net-pcap-win32.zip
+  - 7z x .\net-pcap-win32.zip -onetpcap
   - .\install-gnu-utilities-collection.bat
   - .\install-strawberry-perl.bat
   - .\install-perl-modules-and-dependencies.bat
@@ -15,10 +17,12 @@ test: off
 build_script:
   - cd Perl\Scripts
   - .\build-strawberry-perl-package-for-fusioninventory-agent.bat
-  - dir
-  - dir ..\Strawberry
+  - cd ..
+  - dir Strawberry
 
 artifacts:
+  - path: Perl/Strawberry/*.log
+    name: logs
   - path: Perl/Strawberry/*.txt
     name: txts
   - path: Perl/Strawberry/*.xz

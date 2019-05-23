@@ -58,6 +58,7 @@ declare -r sort=$(type -P sort)
 declare -r tr=$(type -P tr)
 declare -r uniq=$(type -P uniq)
 declare -r find=$(type -P find)
+declare -r cp=$(type -P cp)
 
 # Check the OS
 if [ "${MSYSTEM}" = "MSYS" ]; then
@@ -155,6 +156,11 @@ while (( ${iter} < ${#archs[@]} )); do
    # The process starts
    echo "Working with Strawberry Perl ${strawberry_release} (${strawberry_version}-${arch_label}s)..."
 
+   # Copy netpcap downloaded from Teclib
+   if [ -d "netpcap" ]; then
+      eval ${cp} -av "netpcap/${arch}" "$(pwd)/${strawberry_arch_path}"
+   fi
+
    # Update cpanm
    echo "Updating 'cpanm'..."
    ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-installed --notest --quiet App::cpanminus
@@ -173,6 +179,8 @@ while (( ${iter} < ${#archs[@]} )); do
    # build.log can be used to debug cpanm install problems
    echo "Checking build logs..."
    eval ${find} "$(pwd)/${strawberry_arch_path}/data/.cpanm" -type f -name build.log
+   echo "Keeping perl ${strawberry_version}-${arch_label}s modules build log..."
+   eval ${cp} -av "$(pwd)/${strawberry_arch_path}/data/.cpanm/build.log" "$(pwd)/${strawberry_path}/../build-${arch_label}s.log"
    echo
 
    # Remove perl_path from PATH
