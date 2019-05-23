@@ -158,7 +158,7 @@ while (( ${iter} < ${#archs[@]} )); do
 
    # Copy netpcap downloaded from Teclib
    if [ -d "netpcap" ]; then
-      eval ${cp} -av "netpcap/${arch}" "$(pwd)/${strawberry_arch_path}"
+      eval ${cp} -av "netpcap/${arch}/*" "$(pwd)/${strawberry_arch_path}"
    fi
 
    # Update cpanm
