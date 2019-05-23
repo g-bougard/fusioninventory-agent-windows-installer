@@ -4,8 +4,6 @@ shallow_clone: true
 
 install:
   - cd Perl\Scripts
-  - appveyor DownloadFile https://releases.teclib.net/temp/net-pcap-win32.zip
-  - 7z x .\net-pcap-win32.zip -onetpcap
   - .\install-gnu-utilities-collection.bat
   - .\install-strawberry-perl.bat
   - .\install-perl-modules-and-dependencies.bat
