@@ -61,7 +61,7 @@ declare -r strawberry_pepfia_file="strawberry-perl-${strawberry_version}-all-pep
 
 declare -r strawberry_pepfia_par_file='strawberry-perl-${strawberry_version}-${arch}-par-pepfia-${strawberry_pepfia_branch}-${strawberry_pepfia_build_id}.zip'
 declare -r strawberry_pepfia_par_template_file='fusioninventory-agent-par-template.pl'
-declare -r strawberry_pepfia_url='https://github.com/TECLIB/fusioninventory-agent-windows-installer/releases/download/${github_perl_release_tag}'
+declare -r strawberry_pepfia_url="https://github.com/TECLIB/fusioninventory-agent-windows-installer/releases/download/${github_perl_release_tag}"
 
 declare -i -r maximum_commit_length=10
 
