@@ -171,6 +171,9 @@ while (( ${iter} < ${#archs[@]} )); do
    fi
    eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/wpcap.lib"
    eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/Packet.lib"
+
+   # Next architecture
+   iter=$(( ${iter} + 1 ))
 done
 eval ${rm} -f "/tmp/${npcap_sdk}" > /dev/null 2>&1
 
