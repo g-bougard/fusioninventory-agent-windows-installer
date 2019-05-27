@@ -60,6 +60,7 @@ declare -r uniq=$(type -P uniq)
 declare -r find=$(type -P find)
 declare -r cp=$(type -P cp)
 declare -r reimp=$(type -P reimp)
+declare -r curl=$(type -P curl)
 
 # Check the OS
 if [ "${MSYSTEM}" = "MSYS" ]; then
