@@ -225,7 +225,7 @@ while (( ${iter} < ${#archs[@]} )); do
    echo "Building the Perl ARchive (PAR) package for Strawberry Perl ${strawberry_release} (${strawberry_version}-${arch_label}s)..."
 
    (eval cd "${strawberry_arch_path}"
-    eval ${perl} ${pp} -p -B -c -u -M threads -o ${tmpdir}/${strawberry_pepfia_par_file} \
+    eval ${perl} ${pp} -v -p -B -c -u -M threads -o ${tmpdir}/${strawberry_pepfia_par_file} \
        "${tmpdir}/${strawberry_pepfia_par_template_file}" > ../../pp.log 2>&1
    )
 
@@ -241,7 +241,7 @@ while (( ${iter} < ${#archs[@]} )); do
    echo "Selecting files from Strawberry Perl ${strawberry_release} (${strawberry_version}-${arch_label}s)..."
 
    # Build structure
-   ${install} --mode 0775 --directory "${tmpdir}/Strawberry/${strawberry_version}/${arch}/c/bin/startup/winnt/mingw"
+   ${install} --mode 0775 --directory "${tmpdir}/Strawberry/${strawberry_version}/${arch}/c/bin"
    ${install} --mode 0775 --directory "${tmpdir}/Strawberry/${strawberry_version}/${arch}/cpan/sources"
    ${install} --mode 0775 --directory "${tmpdir}/Strawberry/${strawberry_version}/${arch}/perl/bin"
    ${install} --mode 0775 --directory "${tmpdir}/Strawberry/${strawberry_version}/${arch}/perl/lib"

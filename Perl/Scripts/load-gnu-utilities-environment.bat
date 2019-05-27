@@ -57,6 +57,7 @@ copy /y ..\..\Tools\Curl\x86\brotlidec.dll "%TEMP%" > NUL
 copy /y ..\..\Tools\Curl\x86\brotlienc.dll "%TEMP%" > NUL
 copy /y ..\..\Tools\Curl\x86\brotlicommon.dll "%TEMP%" > NUL
 copy /y ..\..\Tools\Curl\x86\curl-ca-bundle.crt "%TEMP%" > NUL
+copy /y ..\..\Tools\reimp\reimp.exe "%TEMP%" > NUL
 
 setlocal enabledelayedexpansion
 set LOCAL_PATH=%PATH%

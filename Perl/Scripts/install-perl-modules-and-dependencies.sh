@@ -59,6 +59,7 @@ declare -r tr=$(type -P tr)
 declare -r uniq=$(type -P uniq)
 declare -r find=$(type -P find)
 declare -r cp=$(type -P cp)
+declare -r reimp=$(type -P reimp)
 
 # Check the OS
 if [ "${MSYSTEM}" = "MSYS" ]; then
@@ -134,6 +135,43 @@ fusinv_mod_specific_dependences="$(echo ${fusinv_agent_mod_specific_dependences}
                                  ${tr} '\n' ' ')"
 fusinv_mod_specific_dependences="${fusinv_mod_specific_dependences% *}"
 
+# Download npcap as need to install Net::Pcap perl module
+echo "Downloading Npcap for windows 10..."
+eval ${curl} --silent --location --max-redirs 6 --output "/tmp/${npcap_sdk}" \
+   "${npcap_url}" > /dev/null 2>&1
+if [ ! -e "/tmp/${npcap_sdk}" ]; then
+   echo "Failed to download netpcap SDK"
+   exit 4
+fi
+# Npcap installation loop
+while (( ${iter} < ${#archs[@]} )); do
+   # Set arch
+   arch=${archs[${iter}]}
+   # Extract archive
+   eval ${p7z} x -bd -y -o"${strawberry_arch_path}/c" "/tmp/${npcap_sdk}" > /dev/null 2>&1
+   if (( $? == 0 )); then
+      echo -n "."
+      echo "Done and extracted!"
+   else
+      echo "Failure!"
+      echo
+      eval echo "There has been an error decompressing \'${npcap_sdk}\'."
+      echo
+      eval echo -n "Perhaps the URL \'${npcap_url}\' is incorrect.\ "
+      echo -n "Please, check the variable '${npcap_url}' in the 'load-perl-environment' "
+      echo "file, and try again."
+      exit 5
+   fi
+   # Prepare Netpcap libs
+   if [ "${arch}" == "x64" ]; then
+      eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/wpcap.lib"  "${strawberry_arch_path}/c/Lib/wpcap.lib"
+      eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/Packet.lib" "${strawberry_arch_path}/c/Lib/Packet.lib"
+   fi
+   eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/wpcap.lib"
+   eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/Packet.lib"
+done
+eval ${rm} -f "/tmp/${npcap_sdk}" > /dev/null 2>&1
+
 # Installation loop
 while (( ${iter} < ${#archs[@]} )); do
    # Set arch and arch_label
@@ -155,11 +193,6 @@ while (( ${iter} < ${#archs[@]} )); do
 
    # The process starts
    echo "Working with Strawberry Perl ${strawberry_release} (${strawberry_version}-${arch_label}s)..."
-
-   # Copy netpcap downloaded from Teclib
-   if [ -d "netpcap" ]; then
-      eval ${cp} -av "netpcap/${arch}/*" "$(pwd)/${strawberry_arch_path}"
-   fi
 
    # Update cpanm
    echo "Updating 'cpanm'..."
