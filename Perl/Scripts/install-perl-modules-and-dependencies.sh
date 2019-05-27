@@ -138,7 +138,7 @@ fusinv_mod_specific_dependences="${fusinv_mod_specific_dependences% *}"
 # Download npcap as need to install Net::Pcap perl module
 echo "Downloading Npcap for windows 10..."
 eval ${curl} --silent --location --max-redirs 6 --output "/tmp/${npcap_sdk}" \
-   "${npcap_url}" > /dev/null 2>&1
+   "${npcap_url}"
 if [ ! -e "/tmp/${npcap_sdk}" ]; then
    echo "Failed to download netpcap SDK"
    exit 4
@@ -148,7 +148,7 @@ while (( ${iter} < ${#archs[@]} )); do
    # Set arch
    arch=${archs[${iter}]}
    # Extract archive
-   eval ${p7z} x -bd -y -o"${strawberry_arch_path}/c" "/tmp/${npcap_sdk}" > /dev/null 2>&1
+   eval ${p7z} x -bd -y -o"${strawberry_arch_path}/c" "/tmp/${npcap_sdk}"
    if (( $? == 0 )); then
       echo -n "."
       echo "Done and extracted!"
