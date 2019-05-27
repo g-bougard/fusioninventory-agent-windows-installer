@@ -61,6 +61,7 @@ declare -r find=$(type -P find)
 declare -r cp=$(type -P cp)
 declare -r reimp=$(type -P reimp)
 declare -r curl=$(type -P curl)
+declare -r p7z=$(type -P 7z)
 
 # Check the OS
 if [ "${MSYSTEM}" = "MSYS" ]; then
