@@ -146,9 +146,7 @@ if [ ! -e "/tmp/${npcap_sdk}" ]; then
    exit 4
 fi
 # Npcap installation loop
-while (( ${iter} < ${#archs[@]} )); do
-   # Set arch
-   arch=${archs[${iter}]}
+for arch in ${archs[@]}; do
    # Extract archive
    eval ${p7z} x -bd -y -o"${strawberry_arch_path}/c" "/tmp/${npcap_sdk}"
    if (( $? == 0 )); then
@@ -171,9 +169,6 @@ while (( ${iter} < ${#archs[@]} )); do
    fi
    eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/wpcap.lib"
    eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/Packet.lib"
-
-   # Next architecture
-   iter=$(( ${iter} + 1 ))
 done
 eval ${rm} -f "/tmp/${npcap_sdk}" > /dev/null 2>&1
 
