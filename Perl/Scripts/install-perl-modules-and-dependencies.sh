@@ -236,7 +236,7 @@ while (( ${iter} < ${#archs[@]} )); do
 
    # Install modules
    echo "Installing modules..."
-   #${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-satisfied --notest ${fusinv_mod_dependences}
+   ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-satisfied --notest ${fusinv_mod_dependences}
    echo
 
    # build.log can be used to debug cpanm install problems
