@@ -206,11 +206,13 @@ while (( ${iter} < ${#archs[@]} )); do
    if [ -n "${fusinv_mod_specific_dependences}" ]; then
       echo "Installing specific modules..."
       ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-installed --notest ${fusinv_mod_specific_dependences}
+      echo "Keeping perl ${strawberry_version}-${arch_label}s modules build log..."
+      eval ${cp} -av "$(pwd)/${strawberry_arch_path}/data/.cpanm/build.log" "$(pwd)/${strawberry_path}/../build-specific-${arch_label}s.log"
    fi
 
    # Install modules
    echo "Installing modules..."
-   ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-satisfied --notest ${fusinv_mod_dependences}
+   #~ ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-satisfied --notest ${fusinv_mod_dependences}
    echo
 
    # build.log can be used to debug cpanm install problems
