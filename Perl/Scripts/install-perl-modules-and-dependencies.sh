@@ -166,6 +166,8 @@ eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/wpcap.lib"  "${strawberry
 eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/Packet.lib" "${strawberry_arch_path}/c/Lib/Packet.lib"
 eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/wpcap.lib"
 eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/Packet.lib"
+eval ${cp} -avf "libwpcap.a"  "${strawberry_arch_path}/c/Lib/libwpcap.a"
+eval ${cp} -avf "libpacket.a" "${strawberry_arch_path}/c/Lib/libpacket.a"
 eval ${rm} -f "/tmp/${npcap_sdk}" > /dev/null 2>&1
 echo
 
