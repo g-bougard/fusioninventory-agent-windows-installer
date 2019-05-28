@@ -163,8 +163,8 @@ for arch in ${archs[@]}; do
    fi
    # Prepare Netpcap libs
    if [ "${arch}" == "x64" ]; then
-      gendef - C:/Windows/system32/wpcap.dll > wpcap.def
-      dlltool --as-flags=--64 -m i386:x86-64 -k --output-lib libwpcap.a --input-def wpcap.def
+      "${strawberry_arch_path}/c/bin/gendef.exe" - C:/Windows/system32/wpcap.dll > wpcap.def
+      "${strawberry_arch_path}/c/bin/dlltool.exe" --as-flags=--64 -m i386:x86-64 -k --output-lib libwpcap.a --input-def wpcap.def
       eval ${cp} -avf "libwpcap.a"  "${strawberry_arch_path}/c/Lib/libwpcap.a"
    else
       eval ${cp} -avf "${strawberry_arch_path}/WpdPack/Lib/libwpcap.a"  "${strawberry_arch_path}/c/Lib/libwpcap.a"
