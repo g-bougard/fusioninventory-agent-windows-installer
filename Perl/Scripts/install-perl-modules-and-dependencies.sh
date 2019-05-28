@@ -229,7 +229,7 @@ while (( ${iter} < ${#archs[@]} )); do
    # Install specific modules
    if [ -n "${fusinv_mod_specific_dependences}" ]; then
       echo "Installing specific modules..."
-      ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-installed --notest --quiet ${fusinv_mod_specific_dependences}
+      ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-installed --notest ${fusinv_mod_specific_dependences}
    fi
 
    # Install modules
