@@ -137,7 +137,7 @@ fusinv_mod_specific_dependences="$(echo ${fusinv_agent_mod_specific_dependences}
                                  ${tr} '\n' ' ')"
 fusinv_mod_specific_dependences="${fusinv_mod_specific_dependences% *}"
 
-# Download npcap as need to install Net::Pcap perl module
+# Download npcap as need to install Net::Pcap perl module for x64
 echo "Downloading Npcap for windows 10..."
 eval ${curl} --silent --location --max-redirs 6 --output "/tmp/${npcap_sdk}" \
    "${npcap_url}"
@@ -145,32 +145,60 @@ if [ ! -e "/tmp/${npcap_sdk}" ]; then
    echo "Failed to download netpcap SDK"
    exit 4
 fi
-# Npcap installation loop
-for arch in ${archs[@]}; do
-   # Extract archive
-   eval ${p7z} x -bd -y -o"${strawberry_arch_path}/c" "/tmp/${npcap_sdk}"
-   if (( $? == 0 )); then
-      echo -n "."
-      echo "Done and extracted!"
-   else
-      echo "Failure!"
-      echo
-      eval echo "There has been an error decompressing \'${npcap_sdk}\'."
-      echo
-      eval echo -n "Perhaps the URL \'${npcap_url}\' is incorrect.\ "
-      echo -n "Please, check the variable '${npcap_url}' in the 'load-perl-environment' "
-      echo "file, and try again."
-      exit 5
-   fi
-   # Prepare Netpcap libs
-   if [ "${arch}" == "x64" ]; then
-      eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/wpcap.lib"  "${strawberry_arch_path}/c/Lib/wpcap.lib"
-      eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/Packet.lib" "${strawberry_arch_path}/c/Lib/Packet.lib"
-   fi
-   eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/wpcap.lib"
-   eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/Packet.lib"
-done
+# Npcap installation for x64
+arch=x64
+# Extract archive
+eval ${p7z} x -bd -y -o"${strawberry_arch_path}/c" "/tmp/${npcap_sdk}"
+if (( $? == 0 )); then
+   echo "Done and extracted!"
+else
+   echo "Failure!"
+   echo
+   eval echo "There has been an error decompressing \'${npcap_sdk}\'."
+   echo
+   eval echo -n "Perhaps the URL \'${npcap_url}\' is incorrect.\ "
+   echo -n "Please, check the variable '${npcap_url}' in the 'load-perl-environment' "
+   echo "file, and try again."
+   exit 5
+fi
+# Prepare Netpcap libs
+eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/wpcap.lib"  "${strawberry_arch_path}/c/Lib/wpcap.lib"
+eval ${cp} -avf "${strawberry_arch_path}/c/Lib/${arch}/Packet.lib" "${strawberry_arch_path}/c/Lib/Packet.lib"
+eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/wpcap.lib"
+eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/c/Lib/Packet.lib"
 eval ${rm} -f "/tmp/${npcap_sdk}" > /dev/null 2>&1
+echo
+
+# Download winpcap as need to install Net::Pcap perl module for x86
+echo "Downloading legacy WinPcap SDK..."
+eval ${curl} --silent --location --max-redirs 6 --output "/tmp/${winpcap_sdk}" \
+   "${winpcap_url}"
+if [ ! -e "/tmp/${winpcap_sdk}" ]; then
+   echo "Failed to download winpcap SDK"
+   exit 6
+fi
+# WinPcap installation for x86
+arch=x86
+# Extract archive
+eval ${p7z} x -bd -y -o"${strawberry_arch_path}/c" "/tmp/${winpcap_sdk}"
+if (( $? == 0 )); then
+   echo "Done and extracted!"
+else
+   echo "Failure!"
+   echo
+   eval echo "There has been an error decompressing \'${winpcap_sdk}\'."
+   echo
+   eval echo -n "Perhaps the URL \'${winpcap_url}\' is incorrect.\ "
+   echo -n "Please, check the variable '${winpcap_url}' in the 'load-perl-environment' "
+   echo "file, and try again."
+   exit 7
+fi
+# Prepare Netpcap libs
+eval ${cp} -avf "${strawberry_arch_path}/c/WpdPack/Lib/libwpcap.a"  "${strawberry_arch_path}/c/Lib/libwpcap.a"
+eval ${cp} -avf "${strawberry_arch_path}/c/WpdPack/Lib/libpacket.a" "${strawberry_arch_path}/c/Lib/libpacket.a"
+eval ${cp} -avf "${strawberry_arch_path}/c/WpdPack/Include/*"  "${strawberry_arch_path}/c/include"
+eval ${rm} -f "/tmp/${winpcap_sdk}" > /dev/null 2>&1
+echo
 
 # Installation loop
 while (( ${iter} < ${#archs[@]} )); do

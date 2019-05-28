@@ -54,7 +54,7 @@ declare -r strawberry_arch_path='${strawberry_path}/${arch}'
 declare -r strawberry_arch_url='http://strawberryperl.com/download/${strawberry_version}/strawberry-perl-${strawberry_version}-${arch_label}-portable.zip'
 
 declare -r strawberry_pepfia_branch='2.5.x'
-declare -r strawberry_pepfia_build_id='1'
+declare -r strawberry_pepfia_build_id='2'
 declare -r strawberry_pepfia_path="${strawberry_path%/${strawberry_version}}"
 declare -r strawberry_pepfia_file="strawberry-perl-${strawberry_version}-all-pepfia-${strawberry_pepfia_branch}-${strawberry_pepfia_build_id}.tar.xz"
 declare -r strawberry_pepfia_par_file='strawberry-perl-${strawberry_version}-${arch}-par-pepfia-${strawberry_pepfia_branch}-${strawberry_pepfia_build_id}.zip'
@@ -63,6 +63,8 @@ declare -r strawberry_pepfia_url='https://sourceforge.net/projects/fiawi/files/s
 
 declare -r npcap_sdk='npcap-sdk-1.03.zip'
 declare -r npcap_url="https://nmap.org/npcap/dist/${npcap_sdk}"
+declare -r winpcap_sdk='WpdPack_4_1_2.zip'
+declare -r winpcap_url="https://www.winpcap.org/install/bin/${winpcap_sdk}"
 
 declare -i -r maximum_commit_length=10
 
@@ -96,7 +98,8 @@ fi
 declare -r fusinv_agent_mod_name='fusioninventory-agent'
 declare -r fusinv_agent_repository='https://github.com/fusioninventory/fusioninventory-agent.git'
 
-declare -r fusinv_agent_mod_specific_dependences=''
+# We need a fixed Net::Pcap module
+declare -r fusinv_agent_mod_specific_dependences='git://github.com/g-bougard/Net-Pcap.git'
 declare -r fusinv_agent_mod_dependences='Archive::Extract Compress::Zlib DateTime Digest::SHA File::Copy::Recursive File::Which HTTP::Daemon inc::Module::Install IO::Socket::SSL JSON::PP LWP::Protocol::https LWP::UserAgent Net::IP Net::NBName Net::Ping Net::SNMP Net::Write::Layer2 Parallel::ForkManager Parse::EDID Text::Template Thread::Queue UNIVERSAL::require URI::Escape Win32::Daemon Win32::Job Win32::OLE Win32::TieRegistry Win32::Unicode::File XML::TreePP'
 declare -r fusinv_agent_mod_uses='base Config constant Crypt::DES Crypt::Rijndael Cwd Data::Dumper Digest::MD5 Encode Encode::Byte Encode::CN Encode::JP Encode::KR Encode::TW Encode::Unicode English Fcntl File::Basename File::Find File::Glob File::Path File::Spec File::stat File::Temp Getopt::Long HTTP::Cookies HTTP::Headers HTTP::Request HTTP::Status integer IO::Handle lib LWP Memoize MIME::Base64 Net::Domain Net::hostent Net::HTTPS Net::SNMP::Security::USM Net::SNMP::Transport::IPv4::TCP Net::SNMP::Transport::IPv6::TCP Net::SNMP::Transport::IPv6::UDP Pod::Usage POSIX Scalar::Util Socket Storable strict Sys::Hostname Sys::Syslog Thread::Semaphore threads threads::shared Tie::Hash::NamedCapture Time::HiRes Time::Local Time::localtime URI User::pwent utf8 warnings Win32 Win32::API Win32::OLE::Const Win32::OLE::Variant'
 
