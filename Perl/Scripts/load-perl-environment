@@ -61,8 +61,6 @@ declare -r strawberry_pepfia_par_file='strawberry-perl-${strawberry_version}-${a
 declare -r strawberry_pepfia_par_template_file='fusioninventory-agent-par-template.pl'
 declare -r strawberry_pepfia_url='https://sourceforge.net/projects/fiawi/files/strawberry-perl-packages'
 
-declare -r npcap_sdk='npcap-sdk-1.03.zip'
-declare -r npcap_url="https://nmap.org/npcap/dist/${npcap_sdk}"
 declare -r winpcap_sdk='WpdPack_4_1_2.zip'
 declare -r winpcap_url="https://www.winpcap.org/install/bin/${winpcap_sdk}"
 
