@@ -3,8 +3,8 @@ version: '{branch}-build-{build}'
 shallow_clone: true
 
 install:
-  - appveyor DownloadFile https://nmap.org/npcap/dist/npcap-0.995.exe
-  - .\npcap-0.995.exe /S
+  - appveyor DownloadFile https://nmap.org/npcap/dist/npcap-0.96.exe
+  - .\npcap-0.96.exe /S /loopback_support=no
   - cd Perl\Scripts
   - .\install-gnu-utilities-collection.bat
   - .\update-gnu-utilities-collection.bat
