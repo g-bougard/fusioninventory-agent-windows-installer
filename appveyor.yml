@@ -14,7 +14,7 @@ build_script:
   - .\install-strawberry-perl.bat
   - .\install-perl-modules-and-dependencies.bat
   - .\delete-perl-modules-and-dependencies-temporary-files.bat
-#  - .\build-strawberry-perl-package-for-fusioninventory-agent.bat
+  - .\build-strawberry-perl-package-for-fusioninventory-agent.bat
   - cd ..\..
   - dir Perl\Strawberry
 

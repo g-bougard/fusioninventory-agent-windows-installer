@@ -163,13 +163,11 @@ for arch in ${archs[@]}; do
    fi
    # Prepare Netpcap libs
    if [ "${arch}" == "x64" ]; then
-      eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/WpdPack/Lib/x64/wpcap.lib"
-      eval ${reimp} --dlltool "${strawberry_arch_path}/c/bin/dlltool.exe" "${strawberry_arch_path}/WpdPack/Lib/x64/Packet.lib"
+      gendef - C:/Windows/system32/wpcap.dll > wpcap.def
+      dlltool --as-flags=--64 -m i386:x86-64 -k --output-lib libwpcap.a --input-def wpcap.def
       eval ${cp} -avf "libwpcap.a"  "${strawberry_arch_path}/c/Lib/libwpcap.a"
-      eval ${cp} -avf "libpacket.a" "${strawberry_arch_path}/c/Lib/libpacket.a"
    else
       eval ${cp} -avf "${strawberry_arch_path}/WpdPack/Lib/libwpcap.a"  "${strawberry_arch_path}/c/Lib/libwpcap.a"
-      eval ${cp} -avf "${strawberry_arch_path}/WpdPack/Lib/libpacket.a" "${strawberry_arch_path}/c/Lib/libpacket.a"
    fi
    eval ${cp} -avf "${strawberry_arch_path}/WpdPack/Include/*"  "${strawberry_arch_path}/c/include"
 done
@@ -212,7 +210,7 @@ while (( ${iter} < ${#archs[@]} )); do
 
    # Install modules
    echo "Installing modules..."
-   #~ ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-satisfied --notest ${fusinv_mod_dependences}
+   ${perl} ${cpanm} --install --auto-cleanup 0 --no-man-pages --skip-satisfied --notest ${fusinv_mod_dependences}
    echo
 
    # build.log can be used to debug cpanm install problems
