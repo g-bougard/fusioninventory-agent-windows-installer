@@ -1,5 +1,34 @@
 FusionInventory Agent Windows Installer - History of Revisions and Changes
 
+2.5.1-rc2 Wed, 29 May 2019
+agent:
+* FusionInventory Agent 2.5.1-dev (commit: e9fbfed880 | date: may 13 2019)
+* win32: fix service not answering to HTTP request while running a task
+
+core:
+* Don't forget to remove logs folder on uninstall
+* WakeOnlan task supported again
+
+strawberry perl package:
+* Based on Strawberry Perl 5.28.2.1 (May 2019) revision 2
+* Includes Net::Pcap support
+
+2.5.1-rc1 Fri, 24 May 2019
+agent:
+* FusionInventory Agent 2.5.1-dev (commit: e9fbfed880 | date: may 13 2019)
+* win32: fix service not answering to HTTP request while running a task
+
+core:
+* Don't forget to remove logs folder on uninstall
+* WakeOnLan task not supported with Net::Pcap support missing from used perl
+  package
+* Update PCI IDs database (pci.ids file) to 2019.05.16
+* Update USB IDs database (usb.ids file) to 2019.05.08
+
+strawberry perl package:
+* Based on Strawberry Perl 5.28.2.1 (May 2019) revision 1
+* No Net::Pcap support
+
 2.5 Sat, 13 Apr 2019
 agent:
 * FusionInventory Agent 2.5 (commit: 4d01dfac65 | date: apr 12 2019)
