@@ -1,5 +1,10 @@
 FusionInventory Agent Windows Installer - History of Revisions and Changes
 
+core:
+* fix: rc & development releases installers are now running with installer debug
+  option enabled. This creates the debug subfolder to put in command parser log
+  and computed Options.ini file.
+
 2.5.1-rc2 Wed, 29 May 2019
 agent:
 * FusionInventory Agent 2.5.1-dev (commit: e9fbfed880 | date: may 13 2019)
