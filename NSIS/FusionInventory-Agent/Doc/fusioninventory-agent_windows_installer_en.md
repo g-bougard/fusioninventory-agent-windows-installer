@@ -1,4 +1,4 @@
-% FusionInventory Agent Windows Installer 2.4.2\
+% FusionInventory Agent Windows Installer 2.5.1\
   User's Guide
 % Tomás Abad Gómez-Pastrana
 % Jan 18, 2016
@@ -7,12 +7,12 @@
 
 # Synopsys
 
-> `fusioninventory-agent_windows-x86_2.4.2.exe [/Option [/Option [...]]]`
+> `fusioninventory-agent_windows-x86_2.5.1.exe [/Option [/Option [...]]]`
 >
-> `fusioninventory-agent_windows-x64_2.4.2.exe [/Option [/Option [...]]]`
+> `fusioninventory-agent_windows-x64_2.5.1.exe [/Option [/Option [...]]]`
 [^fiawi64]
 
-[^fiawi64]: *`fusioninventory-agent_windows-x64_2.4.2.exe`* can only be
+[^fiawi64]: *`fusioninventory-agent_windows-x64_2.5.1.exe`* can only be
     installed on 64-bit (x86_64) systems.
 
 # Description
@@ -59,8 +59,6 @@ It is possible to achieve FusionInventory Agent Windows Installer from
 
 This section describes some of the most typical uses of FusionInventory Agent
 Windows Installer.
-
-*ToDo*
 
 # Command line options
 
@@ -115,8 +113,13 @@ behaviour](#specific-options-of-the-agent).
 
 `/add-firewall-exception`{#add-firewall-exception}
 
-:   Adds FusionInventory Agent to the Windows Firewall exception list.  (By
-    default: `No`)
+:   Adds FusionInventory Agent to the Windows Firewall exception list.
+    (By default: `Yes`)
+
+`/no-firewall-exception`{#add-firewall-exception}
+
+:   Avoids to add FusionInventory Agent to the Windows Firewall exception list.
+    (By default: `No`)
 
 `/ca-cert-uri`{#ca-cert-uri}=*URI*
 

@@ -8,6 +8,8 @@ core:
  - pre-check the "Accept the license" checkbox on the license page
  - Uncheck by default the "show readme" at the finish page
 * fix: update logfile option when installdir is not the default
+* set "add-firewall-exception" by default now
+* add "/no-firewall-exception" option to permit to change the new default
 
 2.5.1-rc2 Wed, 29 May 2019
 agent:

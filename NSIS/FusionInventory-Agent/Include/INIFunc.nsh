@@ -376,7 +376,7 @@ Function InitINIOptionSectionDefault
 
    ; Write default options values
    ${WriteINIOption} "$R0" "${IO_ACCEPTLICENSE}" "0"
-   ${WriteINIOption} "$R0" "${IO_ADD-FIREWALL-EXCEPTION}" "0"
+   ${WriteINIOption} "$R0" "${IO_ADD-FIREWALL-EXCEPTION}" "1"
    ${WriteINIOption} "$R0" "${IO_BACKEND-COLLECT-TIMEOUT}" "180"
    ${WriteINIOption} "$R0" "${IO_CA-CERT-DIR}" ""
    ${WriteINIOption} "$R0" "${IO_CA-CERT-FILE}" ""

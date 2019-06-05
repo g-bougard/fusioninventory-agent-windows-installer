@@ -241,6 +241,23 @@ Function GetCommandLineOptions
       ${EndIf}
    ${EndCommandLineOptionsSearchBlock}
 
+   ; Search for '/no-firewall-exception' option
+   ${CommandLineOptionsSearchBlock} "/no-firewall-exception" "${IO_ADD-FIREWALL-EXCEPTION}"
+      ; Wipe $R3
+      ;    There should not be anything to wipe
+      Nop
+
+      ; Check $R3 domain
+      ${If} "$R3" != ""
+         ; Syntax error
+         ${SyntaxError}  "'$R2' is a switch, it has no values"
+         ${Break}
+      ${Else}
+         ; Override $R3
+         StrCpy $R3 0
+      ${EndIf}
+   ${EndCommandLineOptionsSearchBlock}
+
    ; Search for '/backend-collect-timeout' option
    ${CommandLineOptionsSearchBlock} "/backend-collect-timeout=" "${IO_BACKEND-COLLECT-TIMEOUT}"
       ; Wipe $R3
