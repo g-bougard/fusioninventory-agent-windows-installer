@@ -4,6 +4,9 @@ core:
 * fix: rc & development releases installers are now running with installer debug
   option enabled. This creates the debug subfolder to put in command parser log
   and computed Options.ini file.
+* little enhancements:
+ - pre-check the "Accept the license" checkbox on the license page
+ - Uncheck by default the "show readme" at the finish page
 
 2.5.1-rc2 Wed, 29 May 2019
 agent:

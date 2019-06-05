@@ -402,7 +402,7 @@ Var FusionInventoryAgentTaskNetCoreInstalled
 ; File or website which the user can select to view using a checkbox
 !define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\docs\releases\agent-readme.txt"
 ; Do not check the 'Show Readme' checkbox by default
-;!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
+!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
 ; Text for a link on the which the user can click to view a website or file
 !define MUI_FINISHPAGE_LINK "The FusionInventory Team"
 ; Website or file which the user can select to view using the link
@@ -438,6 +438,7 @@ Page custom HelpPage_Show HelpPage_Leave ""
 !define MUI_PAGE_CUSTOMFUNCTION_PRE "WelcomePage_Pre"
 !insertmacro MUI_PAGE_WELCOME
 !define MUI_PAGE_CUSTOMFUNCTION_PRE "LicensePage_Pre"
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW licshow ; Tell MUI to call a function before the license page is displayed
 !insertmacro MUI_PAGE_LICENSE "${FIAI_DIR}\LicenseEnglish.rtf"
 Page custom InstallationTypePage_Show InstallationTypePage_Leave ""
 !insertmacro MUI_PAGE_COMPONENTS
@@ -454,6 +455,16 @@ Page custom DebugOptionsPage_Show DebugOptionsPage_Leave ""
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 
+Function licshow                             ; Function to be called before the license page is displayed
+    ; Check it
+    FindWindow $0 "#32770" "" $HWNDPARENT    ; Find the inner dialog
+    GetDlgItem $0 $0 0x40A                   ; Find the checkbox control
+    SendMessage $0 ${BM_SETCHECK} 1 0        ; Check the checkbox
+
+    ; Enable button
+    GetDlgItem $0 $hwndparent 1              ; Find the Install/Next button
+    EnableWindow $0 1                        ; Enable the button
+FunctionEnd
 
 ;--------------------------------
 ; Modern UI 2.0 Page Settings
