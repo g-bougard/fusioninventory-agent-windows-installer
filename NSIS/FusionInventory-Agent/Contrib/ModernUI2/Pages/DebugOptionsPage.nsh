@@ -165,9 +165,10 @@ Function DebugOptionsPage_Create
    ; OnBack Function
    ${NSD_OnBack} DebugOptionsPage_Back
 
-   ; Push $R0 & $R1 onto the stack
+   ; Push $R0, $R1 & $R2 onto the stack
    Push $R0
    Push $R1
+   Push $R2
 
    ; Set default section
    StrCpy $R0 "${IOS_GUI}"
@@ -181,13 +182,21 @@ Function DebugOptionsPage_Create
    ${NSD_CB_SelectString} $hCtl_DebugOptionsPage_DropList2 "$R1"
 
    ; Set TextBox1 Text
+   ; But also fix the ${IO_LOGFILE} option if InstallDir is not the default
    ${ReadINIOption} $R1 "$R0" "${IO_LOGFILE}"
+   ${ReadINIOption} $R2 "$R0" "${IO_INSTALLDIR}"
+   !if ${PRODUCT_PLATFORM_ARCHITECTURE} == ${PLATFORM_ARCHITECTURE_32}
+      ${WordReplace} "$R1" "$PROGRAMFILES32\${PRODUCT_INTERNAL_NAME}\" "$R2\" "+1" "$R1"
+   !else
+      ${WordReplace} "$R1" "$PROGRAMFILES64\${PRODUCT_INTERNAL_NAME}\" "$R2\" "+1" "$R1"
+   !endif
    ${NSD_SetText} $hCtl_DebugOptionsPage_TextBox1 "$R1"
 
    ; Set Number1 Text
    ${ReadINIOption} $R1 "$R0" "${IO_LOGFILE-MAXSIZE}"
    ${NSD_SetText} $hCtl_DebugOptionsPage_Number1 "$R1"
 
+   Pop $R2
    Pop $R1
    Pop $R0
 FunctionEnd

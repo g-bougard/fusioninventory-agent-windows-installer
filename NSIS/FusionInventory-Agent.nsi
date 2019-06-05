@@ -608,6 +608,21 @@ Section "-Init" SecInit
    ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_INSTALLDIR}"
    CreateDirectory "$R0"
    WriteUninstaller "$R0\${PRODUCT_UNINSTALLER}"
+
+   ; Fix the ${IO_LOGFILE} option if InstallDir is not the default
+   ${ReadINIOption} $R0 "${IOS_FINAL}" "${IO_LOGFILE}"
+   ${ReadINIOption} $R1 "${IOS_FINAL}" "${IO_INSTALLDIR}"
+   !if ${PRODUCT_PLATFORM_ARCHITECTURE} == ${PLATFORM_ARCHITECTURE_32}
+      ${WordReplace} "$R0" "$PROGRAMFILES32\${PRODUCT_INTERNAL_NAME}\" "$R1\" "+1" "$R0"
+   !else
+      ${WordReplace} "$R0" "$PROGRAMFILES64\${PRODUCT_INTERNAL_NAME}\" "$R1\" "+1" "$R0"
+   !endif
+   ${WriteINIOption} "${IOS_FINAL}" "${IO_LOGFILE}" "$R0"
+
+   !if ${FIAI_DEBUG_LEVEL} != ${FIAI_DEBUG_LEVEL_0}
+      DetailPrint "LogFile: '$R0'"
+   !endif
+
 SectionEnd
 
 Section "-StrawberryPerl" SecStrawberryPerl
