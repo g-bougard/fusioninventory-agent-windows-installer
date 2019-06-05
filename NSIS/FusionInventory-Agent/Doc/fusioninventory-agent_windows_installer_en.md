@@ -1,7 +1,7 @@
 % FusionInventory Agent Windows Installer 2.5.1\
   User's Guide
-% Tomás Abad Gómez-Pastrana
-% Jan 18, 2016
+% Tomás Abad Gómez-Pastrana, Guillaume Bougard
+% Jun 5, 2019
 
 ----------
 
@@ -132,11 +132,6 @@ behaviour](#specific-options-of-the-agent).
 
     *It is not implemented yet*.
 
-`/dumphelp`{#dumphelp}
-
-:   This option was deprecated in FusionInventory Agent Windows Installer
-    2.3.13.
-
 `/execmode`{#execmode}=*mode*
 
 :   Sets the agent execution mode. (By default: `Current`)
@@ -263,7 +258,7 @@ behaviour](#specific-options-of-the-agent).
     default: `No`)
 
 [^runnow]: Actually it is not so *immediately*. Really, the agent is launched
-    within 70 seconds following the end of the installer.
+    within 10 seconds following the installation success.
 
 `/S`{#S}
 
@@ -852,6 +847,7 @@ of the agent](#specific-options-of-the-agent)).
         "backend-collect-timeout"="180"
         "ca-cert-dir"=""
         "ca-cert-file"=""
+        "conf-reload-interval"="0"
         "debug"="0"
         "delaytime"="3600"
         "html"="0"
@@ -873,6 +869,7 @@ of the agent](#specific-options-of-the-agent)).
         "scan-homedirs"="0"
         "scan-profiles"="0"
         "tag"=""
+        "tasks"=""
         "timeout"="180"
         "user"=""
 
@@ -907,6 +904,10 @@ If you want to report about a bug of FusionInventory Agent Windows Installer,
 or you have an idea or suggestion about it, please, let us know about it using
 any of these ways.
 
+  * Issue area of FusionInventory Agent Windows Installer in GitHub
+
+    <https://github.com/fusioninventory/fusioninventory-agent-windows-installer/issues>
+
   * Mailing list of users
 
     <http://lists.alioth.debian.org/mailman/listinfo/fusioninventory-user>
@@ -917,11 +918,7 @@ any of these ways.
 
   * Forums of FusionInventory
 
-    <http://forum.fusioninventory.org/index.php>
-
-  * Issue area of FusionInventory Agent Windows Installer in GitHub
-
-    <https://github.com/tabad/fusioninventory-agent-windows-installer/issues>
+    <https://forum.fusioninventory.org/>
 
 
 # See also
@@ -940,23 +937,24 @@ any of these ways.
 
 # Authors
 
-Tomás Abad Gómez-Pastrana \<tabadgp@gmail.com\>
+  * Tomás Abad Gómez-Pastrana \<tabadgp at gmail.com\>
+
+  * Guillaume Bougard \<gbougard at teclib.com\>
 
 # Copyright
 
-Copyright 2012-2015 FusionInventory Team. [GNU GPL version 2] or (at your
+Copyright 2012-2019 FusionInventory Team. [GNU GPL version 2] or (at your
 option) any later version. This is free software: you are free to change and
 redistribute it. There is NO WARRANTY, to the extent permitted by law.
 
 
 
 
-[bug #2190]: http://forge.fusioninventory.org/issues/2190
-[bug #2555]: http://forge.fusioninventory.org/issues/2555
 [FusionInventory]: http://www.fusioninventory.org/ "FusionInventory Web Site"
-[FusionInventory Agent configuration]: http://fusioninventory.org/documentation/documentation/agent/configuration.html "FusionInventory Agent configuration"
-[FusionInventory Agent Usage]: http://fusioninventory.org/documentation/documentation/agent/usage.html "FusionInventory Agent Usage"
-[GitHub]: https://github.com/tabad/fusioninventory-agent-windows-installer/releases/
+[FusionInventory Agent configuration]: http://fusioninventory.org/documentation/agent/configuration.html "FusionInventory Agent configuration"
+[FusionInventory Agent Usage]: http://fusioninventory.org/documentation/agent/usage.html "FusionInventory Agent Usage"
+[Official GitHub releases]: https://github.com/fusioninventory/fusioninventory-agent-windows-installer/releases/
+[Teclib GitHub RC releases]: https://github.com/TECLIB/fusioninventory-agent-windows-installer/releases/
 [GNU GPL version 2]: http://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
 [Net::IP]: https://metacpan.org/pod/Net::IP#DESCRIPTION
 [OpenSSL]: http://slproweb.com/products/Win32OpenSSL.html "OpenSSL for Windows"
