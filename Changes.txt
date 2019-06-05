@@ -10,6 +10,7 @@ core:
 * fix: update logfile option when installdir is not the default
 * set "add-firewall-exception" by default now
 * add "/no-firewall-exception" option to permit to change the new default
+* doc: always show english help as only this one is available
 
 2.5.1-rc2 Wed, 29 May 2019
 agent:

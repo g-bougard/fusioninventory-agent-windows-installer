@@ -88,8 +88,9 @@ FunctionEnd
 Function ShowHelpFile
    SetOutPath "$TEMP"
    File "${FIAI_DIR}\Doc\fusioninventory-agent_windows_installer_en.html"
-   File "${FIAI_DIR}\Doc\fusioninventory-agent_windows_installer_fr.html"
-   File "${FIAI_DIR}\Doc\fusioninventory-agent_windows_installer_es.html"
-   ExecShell "open" "$TEMP\fusioninventory-agent_windows_installer_$(HelpFile_Lang).html"
+   ;File "${FIAI_DIR}\Doc\fusioninventory-agent_windows_installer_fr.html"
+   ;File "${FIAI_DIR}\Doc\fusioninventory-agent_windows_installer_es.html"
+   ;ExecShell "open" "$TEMP\fusioninventory-agent_windows_installer_$(HelpFile_Lang).html"
+   ExecShell "open" "$TEMP\fusioninventory-agent_windows_installer_en.html"
 FunctionEnd
 
