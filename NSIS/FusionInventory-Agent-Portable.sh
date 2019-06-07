@@ -130,10 +130,10 @@ sleep 5
 ${rm} -f "Portable/FusionInventory-Agent/Uninstall.exe" > /dev/null 2>&1
 
 # Add data dir
-install --mode 0775 --directory "Portable/FusionInventory-Agent/data"
+install --directory "Portable/FusionInventory-Agent/data"
 
 # Update conf dir
-install --mode 0775 --directory "Portable/FusionInventory-Agent/etc/conf.d"
+install --directory "Portable/FusionInventory-Agent/etc/conf.d"
 mv -f "Portable/FusionInventory-Agent/etc/agent.cfg.sample" "Portable/FusionInventory-Agent/etc/agent.cfg"
 echo 'include "conf.d/"' >>"Portable/FusionInventory-Agent/etc/agent.cfg"
 
@@ -157,7 +157,7 @@ if (( $? == 0 )); then
    # Digest calculation loop
    echo -n "Calculating digest message for ${arch} portable archive."
    for digest in "${digests[@]}"; do
-      ${openssl} dgst -${digest} -c -out "${installer%.exe}-portable.${digest}" "${installer%.exe}-portable.exe"
+      "${openssl}" dgst -${digest} -c -out "${installer%.exe}-portable.${digest}" "${installer%.exe}-portable.exe"
       echo -n "."
    done
    echo ".Done!"
