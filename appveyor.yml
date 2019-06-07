@@ -20,6 +20,7 @@ test: off
 build_script:
   - cd NSIS
   - .\FusionInventory-Agent.bat
+  - .\FusionInventory-Agent-Portable.bat
   - dir
 
 artifacts:
