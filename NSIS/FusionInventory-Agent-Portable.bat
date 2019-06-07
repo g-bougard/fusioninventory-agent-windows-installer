@@ -47,12 +47,11 @@ for %%p in (".") do pushd "%%~fsp"
 cd /d "%~dp0"
 
 set MINGW_PATH=%SYSTEMDRIVE%\MinGW
+set MSYS_PATH=%MINGW_PATH%\msys\1.0
+set MSYSTEM=MSYS
 
 if not exist "%MINGW_PATH%" goto mingw_not_installed
 :: MinGW/MSYS is already installed
-
-:: Load gnu utilities environment
-call ..\Perl\Scripts\load-gnu-utilities-environment.bat
 
 FOR %%I IN (*.exe) DO (
     echo Running %%I
@@ -60,9 +59,6 @@ FOR %%I IN (*.exe) DO (
     echo Building portable archive...
     %MSYS_PATH%\bin\bash.exe "%~dpn0.sh" %%I
 )
-
-:: Unload gnu utilities environment
-call ..\Perl\Scripts\unload-gnu-utilities-environment.bat
 
 goto end_of_file
 
