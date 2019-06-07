@@ -247,7 +247,7 @@ for arch in ${archs[@]}; do
    ${rm} -rf "Portable/FusionInventory-Agent" > /dev/null 2>&1
 
    options="/S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu"
-   echo "${installer} ${options} /installdir=%~dp0\\Portable\\FusionInventory-Agent" >install.bat
+   echo "${installer} ${options} /installdir=C:\\projects\\fusioninventory-agent-windows-installer\\NSIS\\Portable\\FusionInventory-Agent" >install.bat
    ${COMSPEC} //Q //C install.bat
    if (( $? != 0 )); then
       echo '.Failure!'
