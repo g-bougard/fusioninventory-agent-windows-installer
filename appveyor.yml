@@ -2,6 +2,9 @@ version: '{branch}-test-{build}'
 
 shallow_clone: true
 
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 install:
   - cinst pandoc --version 1.17.0.2
   - cd Perl\Scripts
