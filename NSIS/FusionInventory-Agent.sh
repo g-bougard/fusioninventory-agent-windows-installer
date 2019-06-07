@@ -248,7 +248,7 @@ for arch in ${archs[@]}; do
 
    options="/S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu"
    echo ${installer} ${options} /installdir=%~dp0\\Portable\\FusionInventory-Agent >install.bat
-   start install.bat
+   cmd /Q /C install.bat
    if (( $? != 0 )); then
       echo '.Failure!'
       echo " Failed to install agent with ${installer}."
