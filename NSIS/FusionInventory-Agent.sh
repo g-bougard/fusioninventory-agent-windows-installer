@@ -229,7 +229,4 @@ for arch in ${archs[@]}; do
    fi
 done
 
-# Wait to let us try with RDP access before...
-sleep 3600
-
 echo

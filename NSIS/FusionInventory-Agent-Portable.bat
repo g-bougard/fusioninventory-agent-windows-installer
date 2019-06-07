@@ -54,13 +54,11 @@ if not exist "%MINGW_PATH%" goto mingw_not_installed
 :: Load gnu utilities environment
 call ..\Perl\Scripts\load-gnu-utilities-environment.bat
 
-FOR %%INSTALLER IN (*.exe) DO (
-    :: Install silently the agent
-    echo Running "%%INSTALLER"
-    start /wait /b %%INSTALLER /S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu /installdir="%~dp0\Portable\FusionInventory-Agent"
-
-    :: Launch the bash shell script
-    %MSYS_PATH%\bin\bash.exe "%~dpn0.sh" %%INSTALLER
+FOR %%I IN (*.exe) DO (
+    echo Running %%I
+    %%I /S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu /installdir=%~dp0\Portable\FusionInventory-Agent
+    echo Building portable archive...
+    %MSYS_PATH%\bin\bash.exe "%~dpn0.sh" %%I
 )
 
 :: Unload gnu utilities environment
