@@ -229,90 +229,93 @@ for arch in ${archs[@]}; do
    fi
 done
 
-# Build portable archives
-${rm} -rf "Portable" > /dev/null 2>&1
-install --mode 0775 --directory "Portable"
-for arch in ${archs[@]}; do
-   echo -n "Building ${arch} portable archive..."
+# Build portable archives on Appveyor
+if [ -n "${APPVEYOR_BUILD_FOLDER}" -a -d "${APPVEYOR_BUILD_FOLDER}" ]; then
+   ${rm} -rf "Portable" > /dev/null 2>&1
+   install --mode 0775 --directory "Portable"
+   for arch in ${archs[@]}; do
+      echo -n "Building ${arch} portable archive..."
 
-   case $TYPE in
-      development)
-         installer="${fusinv_agent_mod_name}_windows-${arch}_${fusinv_agent_release}-develop-${BUILD}.exe"
-         ;;
-      *)
-         installer="${fusinv_agent_mod_name}_windows-${arch}_${fusinv_agent_release}.exe"
-         ;;
-   esac
+      case $TYPE in
+         development)
+            installer="${fusinv_agent_mod_name}_windows-${arch}_${fusinv_agent_release}-develop-${BUILD}.exe"
+            ;;
+         *)
+            installer="${fusinv_agent_mod_name}_windows-${arch}_${fusinv_agent_release}.exe"
+            ;;
+      esac
 
-   ${rm} -rf "Portable/FusionInventory-Agent" > /dev/null 2>&1
+      ${rm} -rf "Portable/FusionInventory-Agent" > /dev/null 2>&1
 
-   options="/S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu"
-   echo "${installer} ${options} /installdir=C:\\projects\\fusioninventory-agent-windows-installer\\NSIS\\Portable\\FusionInventory-Agent" >install.bat
-   ${COMSPEC} //Q //C install.bat
-   if (( $? != 0 )); then
-      echo '.Failure!'
-      echo " Failed to install agent with ${installer}."
-      continue
-   fi
+      options="/S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu"
+      echo "echo Running from ${APPVEYOR_BUILD_FOLDER}..." >install.bat
+      echo "${installer} ${options} /installdir=${APPVEYOR_BUILD_FOLDER//\\/\\\\}\\NSIS\\Portable\\FusionInventory-Agent" >>install.bat
+      ${COMSPEC} //Q //C install.bat
+      if (( $? != 0 )); then
+         echo '.Failure!'
+         echo " Failed to install agent with ${installer}."
+         continue
+      fi
 
-   # Wait until agent is fully installed
-   let timeout=300
-   while [ ! -e "Portable/FusionInventory-Agent/share/usb.ids" ]; do
-      sleep 1
-      let --timeout
-      (( timeout % 10 )) || echo -n
-      (( timeout % 60 )) || echo
-      if [ "$timeout" -eq "0" ]; then
-         echo "Failed on a timeout"
-         ls Portable/FusionInventory-Agent
-         exit 5
+      # Wait until agent is fully installed
+      let timeout=300
+      while [ ! -e "Portable/FusionInventory-Agent/share/usb.ids" ]; do
+         sleep 1
+         let --timeout
+         (( timeout % 10 )) || echo -n
+         (( timeout % 60 )) || echo
+         if [ "$timeout" -eq "0" ]; then
+            echo "Failed on a timeout"
+            ls Portable/FusionInventory-Agent
+            exit 5
+         fi
+      done
+      # Wait a little more by security
+      sleep 5
+      ls Portable/FusionInventory-Agent
+
+      # Cleanup
+      ${rm} -f "Portable/FusionInventory-Agent/Uninstall.exe" > /dev/null 2>&1
+
+      # Add data dir
+      install --mode 0775 --directory "Portable/FusionInventory-Agent/data"
+
+      # Update conf dir
+      install --mode 0775 --directory "Portable/FusionInventory-Agent/etc/conf.d"
+      mv -f "Portable/FusionInventory-Agent/etc/agent.cfg.sample" "Portable/FusionInventory-Agent/etc/agent.cfg"
+      echo 'include "conf.d/"' >>"Portable/FusionInventory-Agent/etc/agent.cfg"
+
+      # Fix agent launcher to use config file
+      sed -i -e "s/perl\.exe fusioninventory-agent/perl.exe fusioninventory-agent --conf-file ..\\\\..\\\\etc\\\\agent.cfg/" \
+         "Portable/FusionInventory-Agent/fusioninventory-agent.bat"
+
+      # Reset _confdir in Config.pm
+      sed -i -e "s|'_confdir' => .*$|'_confdir' => '../../etc',|" \
+         "Portable/FusionInventory-Agent/perl/agent/FusionInventory/Agent/Config.pm"
+
+      # Fix to use relative path in setup.pm
+      sed -i -e "s|use lib.*$|use lib '../agent';|" -e "s|datadir.*$|datadir => '../../share',|" \
+         -e "s|vardir.*$|vardir  => '../../var',|" -e "s|libdir.*$|libdir  => '../agent',|" \
+         "Portable/FusionInventory-Agent/perl/lib/setup.pm"
+
+      ( cd Portable ; 7z a -bd -sfx7z.sfx -stl -y "../${installer%.exe}-portable.exe" "FusionInventory-Agent" >7z-${arch}-portable.txt 2>&1; )
+      if (( $? == 0 )); then
+         echo '.Done!'
+
+         # Digest calculation loop
+         echo -n "Calculating digest message for ${arch} portable archive."
+         for digest in "${digests[@]}"; do
+            ${openssl} dgst -${digest} -c -out "${installer%.exe}-portable.${digest}" "${installer%.exe}-portable.exe"
+            echo -n "."
+         done
+         echo ".Done!"
+      else
+         echo '.Failure!'
+         echo " Failed to build ${arch} portable agent archive."
       fi
    done
-   # Wait a little more by security
-   sleep 5
-   ls Portable/FusionInventory-Agent
 
-   # Cleanup
-   ${rm} -f "Portable/FusionInventory-Agent/Uninstall.exe" > /dev/null 2>&1
-
-   # Add data dir
-   install --mode 0775 --directory "Portable/FusionInventory-Agent/data"
-
-   # Update conf dir
-   install --mode 0775 --directory "Portable/FusionInventory-Agent/etc/conf.d"
-   mv -f "Portable/FusionInventory-Agent/etc/agent.cfg.sample" "Portable/FusionInventory-Agent/etc/agent.cfg"
-   echo 'include "conf.d/"' >>"Portable/FusionInventory-Agent/etc/agent.cfg"
-
-   # Fix agent launcher to use config file
-   sed -i -e "s/perl\.exe fusioninventory-agent/perl.exe fusioninventory-agent --conf-file ..\\\\..\\\\etc\\\\agent.cfg/" \
-      "Portable/FusionInventory-Agent/fusioninventory-agent.bat"
-
-   # Reset _confdir in Config.pm
-   sed -i -e "s|'_confdir' => .*$|'_confdir' => '../../etc',|" \
-      "Portable/FusionInventory-Agent/perl/agent/FusionInventory/Agent/Config.pm"
-
-   # Fix to use relative path in setup.pm
-   sed -i -e "s|use lib.*$|use lib '../agent';|" -e "s|datadir.*$|datadir => '../../share',|" \
-      -e "s|vardir.*$|vardir  => '../../var',|" -e "s|libdir.*$|libdir  => '../agent',|" \
-      "Portable/FusionInventory-Agent/perl/lib/setup.pm"
-
-   ( cd Portable ; 7z a -bd -sfx7z.sfx -stl -y "../${installer%.exe}-portable.exe" "FusionInventory-Agent" >7z-${arch}-portable.txt 2>&1; )
-   if (( $? == 0 )); then
-      echo '.Done!'
-
-      # Digest calculation loop
-      echo -n "Calculating digest message for ${arch} portable archive."
-      for digest in "${digests[@]}"; do
-         ${openssl} dgst -${digest} -c -out "${installer%.exe}-portable.${digest}" "${installer%.exe}-portable.exe"
-         echo -n "."
-      done
-      echo ".Done!"
-   else
-      echo '.Failure!'
-      echo " Failed to build ${arch} portable agent archive."
-   fi
-done
-
-${rm} -rf "Portable" > /dev/null 2>&1
+   ${rm} -rf "Portable" > /dev/null 2>&1
+fi
 
 echo
