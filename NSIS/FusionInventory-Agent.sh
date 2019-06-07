@@ -248,8 +248,6 @@ for arch in ${archs[@]}; do
 
    #~ options="/S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu"
    #~ echo ${installer} ${options} /installdir=%~dp0\\Portable\\FusionInventory-Agent >install.bat
-   echo
-   ls ${installer}
    ${COMSPEC} //C ${installer} //S //acceptlicense //installtype=from-scratch //execmode=manual //installtasks=Full //installdir=%~dp0\\Portable\\FusionInventory-Agent
    if (( $? != 0 )); then
       echo '.Failure!'
@@ -258,8 +256,15 @@ for arch in ${archs[@]}; do
    fi
 
    # Wait until agent is fully installed
+   let timeout=300
    while [ ! -e "Portable/FusionInventory-Agent/share/usb.ids" ]; do
-      echo -n .
+      sleep 1
+      let --timeout
+      if [ "$timeout" -eq "0" ]; then
+         echo "Failed on a timeout"
+         ls Portable/FusionInventory-Agent
+         exit 5
+      fi
    done
    # Wait a little more by security
    sleep 5
