@@ -56,8 +56,8 @@ call ..\Perl\Scripts\load-gnu-utilities-environment.bat
 
 FOR %%INSTALLER IN (*.exe) DO (
     :: Install silently the agent
-    @echo Running %%INSTALLER...
-    %%INSTALLER /S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu /installdir="%~dp0\Portable\FusionInventory-Agent"
+    echo Running "%%INSTALLER"
+    start /wait /b %%INSTALLER /S /acceptlicense /installtype=from-scratch /execmode=manual /installtasks=Full /no-start-menu /installdir="%~dp0\Portable\FusionInventory-Agent"
 
     :: Launch the bash shell script
     %MSYS_PATH%\bin\bash.exe "%~dpn0.sh" %%INSTALLER
